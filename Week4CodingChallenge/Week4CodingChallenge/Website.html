@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+
+    <header></header>
+
+    <section></section>
+
+    <script>
+        var header = document.querySelector('header');
+        var section = document.querySelector('section');
+
+        var results;
+
+        (function loadFunc() {
+            var xmlRequest = new XMLHttpRequest();
+            xmlRequest.onreadystatechange = function () {
+                if (xmlRequest.readyState == 4 && xmlRequest.status == 200) {
+                    results = xmlRequest.responseText;
+                    results = JSON.parse(results);
+                    console.log("results: ", results);
+                    console.log("header element: ", header);
+                    populateHtml(results);
+                }
+            }
+            xmlRequest.open('GET', 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json', true);
+            xmlRequest.send();
+            xmlRequest.responseType = 'json';
+        })();
+
+        function populateHtml(results) {
+            h1 = document.createElement("H1");
+            h1.innerHTML = results.squadName;
+            p = document.createElement("p");
+            p.innerHTML = "Hometown: " + results.homeTown + " // Formed: " + results.formed;
+            header.appendChild(h1);
+            header.appendChild(p);
+
+            var secDiv = document.createElement("Article");
+            var secHeader = document.createElement("H2");
+            var secP = document.createElement("P");
+            var secUL = document.createElement("UL");
+            var secULNode = document.createElement("LI");
+            for (var i in results.members) {
+                var cloneDiv = secDiv.cloneNode(true);
+
+                var cloneHeader = secHeader.cloneNode(true);
+                cloneHeader.innerHTML = results.members[i].name;
+                cloneDiv.appendChild(cloneHeader);
+
+                var cloneP = secP.cloneNode(true);
+                cloneP.innerHTML = "Secret Identity: " + results.members[i].secretIdentity +
+                    "\nAge: " + results.members[i].age + 
+                    "\nSuper Powers: ";
+
+                var cloneUL = secUL.cloneNode(true);
+                cloneP.appendChild(cloneUL);
+                for (var j in results.members[i].powers) {
+                    var cloneULNode = secULNode.cloneNode(true);
+                    cloneULNode.innerHTML = results.members[i].powers[j];
+                    cloneUL.appendChild(cloneULNode);
+                }
+                cloneP.appendChild(cloneUL);
+                cloneDiv.appendChild(cloneP);
+                section.appendChild(cloneDiv);
+
+                
+            }
+
+        }
+
+    </script>
+</body>
+</html>

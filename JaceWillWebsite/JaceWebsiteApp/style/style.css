@@ -1,0 +1,99 @@
+﻿body {
+    background-image: url('../pics/background.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.content{
+    width: 100%;
+    height: auto;
+    margin: 10px 5px;
+    text-align: center;
+}
+
+.details {
+    width: 49%;
+    margin: 0px;
+    padding-top: 50px;
+    min-width: 400px;
+    height: 300px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+div.pageContainer{
+    background-color: #FFFFFF;
+    height: auto;
+    width: 80%;
+    margin: auto;
+    padding: 5%;
+    opacity: 0.9;
+}
+div.menuBar{
+    width: 100%;
+    height: 50px;
+    margin: 5px 0px;
+}
+a.menu{
+    color: #000000;
+    border-radius:3px;
+    margin: 0px 2px;
+    text-decoration: none;
+    float:left;
+    text-align: center;
+    padding: 15px 20px;
+    background-color:#dadada;
+    box-shadow: #dadada 2px 2px 2px;
+}
+a.menuRegister {
+    float: right;
+}
+.menuBar a:hover{
+    background-color: darkslategray;
+    color:#FFFFFF;
+}
+.menuBar a.active{
+    background-color: #000000;
+    color: #FFFFFF;
+}
+footer {
+    text-align: center;
+}
+.formInput {
+    align-self:auto;
+}
+fieldset{
+    background-color: #dadada;
+    width: 80%;
+    height: auto;
+}
+.genderCheck {
+    display: inline;
+}
+.header {
+    height: 30px;
+    padding: 30px 10%;
+    width: 80%;
+    font-size: 30px;
+    background-color: #dadada;
+    box-shadow: #dadada 2px 2px 2px;
+}
+
+.video {
+    width: 49%;
+    margin:0px;
+    padding: 0px;
+    min-width: 400px;
+    height: 350px;
+    background-color: yellow;
+    display: inline;
+    vertical-align: top;
+    
+}
+
+.section {
+    width: 80%;
+    height: 200px;
+    margin: auto;
+    background-color: #dadada;
+}

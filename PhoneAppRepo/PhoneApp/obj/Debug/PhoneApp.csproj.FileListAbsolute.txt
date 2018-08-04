@@ -1,0 +1,12 @@
+C:\Users\Jwillia3\Source\Repos\TrainingPhoneApp\PhoneApp\bin\Debug\PhoneApp.exe.config
+C:\Users\Jwillia3\Source\Repos\TrainingPhoneApp\PhoneApp\bin\Debug\PhoneApp.exe
+C:\Users\Jwillia3\Source\Repos\TrainingPhoneApp\PhoneApp\bin\Debug\PhoneApp.pdb
+C:\Users\Jwillia3\Source\Repos\TrainingPhoneApp\PhoneApp\obj\Debug\PhoneApp.csprojResolveAssemblyReference.cache
+C:\Users\Jwillia3\Source\Repos\TrainingPhoneApp\PhoneApp\obj\Debug\PhoneApp.exe
+C:\Users\Jwillia3\Source\Repos\TrainingPhoneApp\PhoneApp\obj\Debug\PhoneApp.pdb
+C:\Users\Jwillia3\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\bin\Debug\PhoneApp.exe.config
+C:\Users\Jwillia3\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\bin\Debug\PhoneApp.exe
+C:\Users\Jwillia3\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\bin\Debug\PhoneApp.pdb
+C:\Users\Jwillia3\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\obj\Debug\PhoneApp.csprojResolveAssemblyReference.cache
+C:\Users\Jwillia3\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\obj\Debug\PhoneApp.exe
+C:\Users\Jwillia3\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\obj\Debug\PhoneApp.pdb

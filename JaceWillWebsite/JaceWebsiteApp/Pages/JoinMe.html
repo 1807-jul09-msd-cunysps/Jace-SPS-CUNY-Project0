@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="../style/style.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="scripts/jquery-3.0.0.slim.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="../scripts/umd/popper.js"></script>
+
+    <script src="../scripts/myScripts/joinScripts.js"></script>
+    <title>Jace I. Williams</title>
+</head>
+<body>
+    <div class="pageContainer">
+        <div>
+            <header class="header"><strong>Jace I. Williams</strong></header>
+            <div class="menuBar">
+                <a class="menu" href="../Pages/Home.html">Home</a>
+                <a class="menu" href="../Pages/About.Html">About Me</a>
+                <a class="menu" href="../Pages/Contact.html">Contact</a>
+                <a class="menu" href="../Pages/JoinMe.html">Join Me</a>
+                <a class="menu menuRegister" href="../Register.html">Register</a>
+            </div>
+        </div>
+        <div class="content">
+            <form>
+                <div id="joinMeForm" class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="firstName">First:</label>
+                            <input id="firstName" class="form-control" type="text" onblur="validateFLNames('firstName', 'lastName')" required />
+                            <div id="firstNameValidate"></div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="lastName">Last:</label>
+                            <input id="lastName" class="form-control" type="text" onblur="validateFLNames('lastName', 'firstName')" required />
+                            <div id="lastNameValidate"></div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Gender:</label><br />
+                            <input style="display:inline-block;" type="radio" name="gender" value="male" checked /> Male <br />
+                            <input style="display:inline-block;" type="radio" name="gender" value="female" /> Female <br />
+                        </div>
+                    </div>
+                    <fieldset class="col-md-12">
+                        <legend> Current Address </legend>
+                        <div class="form-row">
+                            <div class="col-md-5 mb-3">
+                                <label for="address1">Address Line 1:</label>
+                                <input id="address1" class="form-control" type="text" required />
+                                <div id="address1Validate"></div>
+                            </div>
+                            <div class="col-md-5 mb-3">
+                                <label for="address2">Address Line 2:</label>
+                                <input id="address2" class="form-control" type="text" required />
+                                <div id="address2Validate"></div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label for="zip">Zip Code:</label>
+                                <input id="zip" class="form-control" type="text" required />
+                                <div id="address2Validate"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="city">City:</label>
+                            <input id="city" class="form-control" type="text" required />
+                            <div id="cityValidate"></div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="state">State:</label>
+                            <input id="state" class="form-control" type="text" required />
+                            <div id="stateValidate"></div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="country">Country:</label>
+                            <input id="country" class="form-control" type="text" required />
+                            <div id="countryValidate"></div>
+                        </div>
+                        <div class=" col-md-2 mb-3">
+                            <label for="country">Permanent Address?</label>
+                            <select class="custom-select" id="inputGroupSelect01">
+                                <option selected>Yes</option>
+                                <option value="1">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                        <fieldset id="addressSet">
+                            <legend>Current Address</legend>
+                            <div class="formInput">
+                                <label for="address1">Address Line 1</label> <label id="Validate"></label> <br />
+                                <input id="address1" type="text" class="form-control" onblur="validateSymbols('address1')" /><br />
+                                Address Line 2<br />
+                                <input type="text" class="form-control" /><br />
+                                City<br />
+                                <input type="text" class="form-control" /><br />
+                                State<br />
+                                <input type="text" class="form-control" /><br />
+                                Country<br />
+                                <input type="text" class="form-control" /><br />
+                                Zipcode<br />
+                                <input type="text" class="form-control" /><br />
+                                Is this your Permanent Address?<br />
+                                <select id="checkAddress" onchange="checkVal(this)">
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <div id="permTarget"></div>
+                        <fieldset>
+                            <legend>Contact Details</legend>
+                            <div class="formInput">
+                                Country Code <br />
+                                <input type="text" /><br />
+                                Area Code<br />
+                                <input type="text" /><br />
+                                Phone<br />
+                                <input type="text" /><br />
+                                Ext<br />
+                                <input type="text" /><br />
+                                Email<br />
+                                <input type="text" /><br />
+                            </div>
+                        </fieldset>
+                    </div>
+            </form>
+        </div>
+        <footer>&copy;Jace Williams. All rights reserved as per 2018</footer>
+    </div>
+</body>
+</html>
