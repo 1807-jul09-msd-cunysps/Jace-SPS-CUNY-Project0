@@ -1,0 +1,7 @@
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\bin\Release\PhoneApp.exe.config
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\bin\Release\PhoneApp.exe
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\bin\Release\PhoneApp.pdb
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\obj\Release\PhoneApp.csprojAssemblyReference.cache
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\obj\Release\PhoneApp.csproj.CoreCompileInputs.cache
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\obj\Release\PhoneApp.exe
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\PhoneApp\obj\Release\PhoneApp.pdb

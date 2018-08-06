@@ -1,93 +1,39 @@
-﻿function checkVal(element) {
+﻿var gender = "male";
+
+function permAddress(element) {
     try {
         var target = document.getElementById("permTarget");
-        if (element.value == "no" && target.childNodes.length == 0) {
+        if (element.value == 1 && target.childNodes.length == 0) {
             //var list = ["Address Line 1", "Address Line 2", "City", "State", "Country", ]
-            var fieldset = document.getElementById("addressSet");
+            var fieldset = document.getElementById("addressFS");
             var newSet = fieldset.cloneNode(true);
-            for (var i in newSet.childNodes.length) {
-                console.log(newSet.childNodes[i].value);
-            }
-
-            var newFieldset = document.createElement("FIELDSET");
-            var legend = document.createElement("LEGEND");
-            legend.innerHTML = "Permanent Address";
-
-            var breakLine = document.createElement("BR");
-            var breakLine1 = document.createElement("BR");
-            var breakLine2 = document.createElement("BR");
-            var breakLine3 = document.createElement("BR");
-            var breakLine4 = document.createElement("BR");
-            var breakLine5 = document.createElement("BR");
-            var breakLine6 = document.createElement("BR");
-            var breakLine7 = document.createElement("BR");
-            var breakLine8 = document.createElement("BR");
-            var breakLine9 = document.createElement("BR");
-            var breakLine10 = document.createElement("BR");
-            var breakLine11 = document.createElement("BR");
-
-            var add1Label = document.createElement("LEBEL");
-            add1Label.innerHTML = "Address Line 1";
-            var add1Input = document.createElement("INPUT");
-            var add2Label = document.createElement("LEBEL");
-            add2Label.innerHTML = "Address Line 2";
-            var add2Input = document.createElement("INPUT");
-            
-            var cityLabel = document.createElement("LEBEL");
-            cityLabel.innerHTML = "City";
-            var cityInput = document.createElement("INPUT");
-
-            var stateLabel = document.createElement("LEBEL");
-            stateLabel.innerHTML = "State";
-            var stateInput = document.createElement("INPUT");
-
-
-            var countryLabel = document.createElement("LEBEL");
-            countryLabel.innerHTML = "Country";
-            var countryInput = document.createElement("INPUT");
-
-            var zipLabel = document.createElement("LEBEL");
-            zipLabel.innerHTML = "Zipcode";
-            var zipInput = document.createElement("INPUT");
-            debugger;
-
-            newFieldset.appendChild(legend);
-            newFieldset.appendChild(add1Label);
-            newFieldset.appendChild(breakLine);
-            newFieldset.appendChild(add1Input);
-            newFieldset.appendChild(breakLine2);
-            
-            newFieldset.appendChild(add2Label);
-            newFieldset.appendChild(breakLine3);
-            newFieldset.appendChild(add2Input);
-            newFieldset.appendChild(breakLine4);
-
-            newFieldset.appendChild(cityLabel);
-            newFieldset.appendChild(breakLine5);
-            newFieldset.appendChild(cityInput);
-            newFieldset.appendChild(breakLine6);
-
-            newFieldset.appendChild(stateLabel);
-            newFieldset.appendChild(breakLine7);
-            newFieldset.appendChild(stateInput);
-            newFieldset.appendChild(breakLine8);
-
-            newFieldset.appendChild(countryLabel);
-            newFieldset.appendChild(breakLine9);
-            newFieldset.appendChild(countryInput);
-            newFieldset.appendChild(breakLine10);
-
-            newFieldset.appendChild(zipLabel);
-            newFieldset.appendChild(breakLine11);
-            newFieldset.appendChild(zipInput);
-
-            target.appendChild(newFieldset);
+            console.log("newSet: ", newSet);
+            newSet.childNodes[1].innerHTML = "Permanent Address"
+            target.appendChild(newSet);
         } else if (target.childNodes.length == 1){
             target.removeChild(permTarget.childNodes[0]);
         }
     } catch (e) {
         console.log("Error: ", e);
     }   
+}
+
+function genderSelect(element) {
+    //debugger;
+    let sel, desel;
+    if (element.value == "male") {
+        gender = "male";
+        sel = "maleBtn";
+        desel = "femaleBtn";
+    } else {
+        gender = "female";
+        desel = "maleBtn";
+        sel = "femaleBtn";
+    }
+    var selElement = document.getElementById(sel);
+    var deselElemnt = document.getElementById(desel);
+    selElement.classList.add("btn-dark");
+    deselElemnt.classList.remove("btn-dark")
 }
 
 function validateFLNames(elementID1, elementID2) {
@@ -99,37 +45,92 @@ function validateFLNames(elementID1, elementID2) {
     if (element1.value == element2.value && element1.value.length != 0) {
         text = "First and last names cannot be the same."
         element1.classList.add("is-invalid");
-    }else if (/^[a-zA-Z]+$/.test(element1.value) || element1.value.length == 0 ) {
+    } else if (validateCharsCheck(element1) || element1.value.length == 0 ) {
         text = "";
         element1.classList.remove("is-invalid");
     } else {
         element1.classList.add("is-invalid");
-        text = "Please only enter non numeric values.";
+        text = "Numeric values and Symbols are not allowed in this field.";
     }
     document.getElementById(elementID1 + "Validate").innerHTML = text;
 }
 
-function validateSymbols(elementID) {
-    debugger;
-    let element1 = document.getElementById(elementID);
-
-    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(element1.value) || element1.value.length == 0) {
-        text = "";
-        element1.classList.remove("is-invalid");
-    } else {
-        element1.classList.add("is-invalid");
-        text = "Please do not enter symbol values.";
-    }
-    document.getElementById(elementID + "Validate").innerHTML = text;
+function validateSymbolsCheck(element) {
+    var symbols = /[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?\(\)_]/;
+    return (symbols.test(element.value)) ? true : false;
 }
 
-function validateNumerics(elementID) {
-    var x, text;
-    x = document.getElementById(elementID).value;
-    if (!isNaN(x) && x != "") {
-        text = "Please only enter non numeric values.";
-    } else{
+function validateNumbersCheck(element) {
+    var numbers = /^\d*$/;
+    return (numbers.test(element.value)) ? true : false;
+}
+
+function validateCharsCheck(element) {
+    var chars = /^[a-zA-Z\s]+$/;
+    return (chars.test(element.value)) ? true : false;
+}
+
+function validateNumbers(element) {
+    var results;
+    console.log(validateNumbersCheck(element));
+    console.log(validateSymbolsCheck(element));
+    if ((validateNumbersCheck(element) && !validateSymbolsCheck(element)) || element.value.length == 0) {
         text = "";
+        element.classList.remove("is-invalid");
+        results = (element.value.length != 0) ? true : false;
+    } else {
+        element.classList.add("is-invalid");
+        text = "Only numeric values are allowed in this field.";
+        results = false;
     }
-    document.getElementById(elementID + "Validate").innerHTML = text;
+    document.getElementById(element.id + "Validate").innerHTML = text;
+    return results;
+}
+function validateChars(element) {
+    //debugger;
+    var results;
+    console.log("numbers: " + validateCharsCheck(element));
+    console.log("symbols: " + validateSymbolsCheck(element));
+    if (validateCharsCheck(element) && !validateSymbolsCheck(element) || element.value.length == 0) {
+        text = "";
+        element.classList.remove("is-invalid");
+        results = true;
+    }else {
+        element.classList.add("is-invalid");
+        text = "Numeric values and Symbols are not allowed in this field.";
+        results = false;
+    }
+    document.getElementById(element.id + "Validate").innerHTML = text;
+    return results;
+}
+
+function validateZip(element) {
+    if (validateNumbers(element)) {
+        zipCodeApi(element)
+    }
+}
+
+function zipCodeApi(element) {
+    var url = "http://api.zippopotam.us/US/" + element.value;
+    var ajaxRequest = new XMLHttpRequest;
+    ajaxRequest.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            try {
+                var response = this.responseText;
+                console.log(response);
+                if (response != "" || response != undefined) {
+                    var jsonObj = JSON.parse(response);
+                    document.getElementById("city").value = jsonObj.places[0]["place name"];
+                    document.getElementById("state").value = jsonObj.places[0]["state"];
+                    document.getElementById("country").value = jsonObj.country;
+                }
+            } catch (Exception) {
+                console.log("ERROR AJAX Request: " + Exception);
+            }
+        } else if (this.readyState == 4 && this.status == 404) {
+            console.log("ERROR AJAX REQUEST: Zip Code entered returned no results.");
+        }
+    }
+    ajaxRequest.open("GET", url, true);
+    ajaxRequest.send();
 }

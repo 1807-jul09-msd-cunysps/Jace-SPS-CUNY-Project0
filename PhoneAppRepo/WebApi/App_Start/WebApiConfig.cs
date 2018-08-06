@@ -9,6 +9,7 @@ namespace WebApi
     {
         public static void Register(HttpConfiguration config)
         {
+            //Allow Cors
             config.EnableCors();
             // Web API configuration and services
 
@@ -17,7 +18,7 @@ namespace WebApi
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{Controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

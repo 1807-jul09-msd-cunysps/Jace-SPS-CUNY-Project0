@@ -32,3 +32,39 @@ c:\users\jwillia3\documents\visual studio 2017\Projects\JaceWebsiteApp\JaceWebsi
 c:\users\jwillia3\documents\visual studio 2017\Projects\JaceWebsiteApp\JaceWebsiteApp\obj\Debug\JaceWebsiteApp.csprojResolveAssemblyReference.cache
 c:\users\jwillia3\documents\visual studio 2017\Projects\JaceWebsiteApp\JaceWebsiteApp\obj\Debug\JaceWebsiteApp.dll
 c:\users\jwillia3\documents\visual studio 2017\Projects\JaceWebsiteApp\JaceWebsiteApp\obj\Debug\JaceWebsiteApp.pdb
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\csc.exe
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\csc.exe.config
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\csc.rsp
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\csi.exe
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\csi.rsp
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\System.AppContext.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\vbc.exe
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\vbc.exe.config
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\vbc.rsp
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\VBCSCompiler.exe
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\JaceWebsiteApp.dll.config
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\JaceWebsiteApp.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\JaceWebsiteApp.pdb
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\obj\Debug\JaceWebsiteApp.csprojAssemblyReference.cache
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\obj\Debug\JaceWebsiteApp.csproj.CoreCompileInputs.cache
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\obj\Debug\JaceWebsiteApp.csproj.CopyComplete
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\obj\Debug\JaceWebsiteApp.dll
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\JaceWillWebsite\JaceWebsiteApp\obj\Debug\JaceWebsiteApp.pdb

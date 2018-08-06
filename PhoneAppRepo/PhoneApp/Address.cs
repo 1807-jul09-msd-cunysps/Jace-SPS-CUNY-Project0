@@ -19,7 +19,7 @@ namespace PhoneApp
         public string AddressST { get => address; set => address = value; }
         public string City { get => city; set => city = value;}
         public string State { get => state; set => state = value; }
-        internal Country Country { get => country; set => country = value; }
+        public Country Country { get => country; set => country = value; }
         
         public Address(string address, string city, string state, int zipCode, int countryID, Country c)
         {

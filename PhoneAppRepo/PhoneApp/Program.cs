@@ -146,7 +146,7 @@ namespace PhoneApp
                                         Console.WriteLine();
 
                                         string fname, lname, gender, state, city, countryName, addressSt;
-                                        int age, zip, countryCode, addressID = 0, countryID = 0;
+                                        int age, zip, countryCode;
                                         long phoneNum;
                                         Console.WriteLine("First Name:");
                                         fname = Console.ReadLine();

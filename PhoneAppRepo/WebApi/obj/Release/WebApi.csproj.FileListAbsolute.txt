@@ -1,0 +1,2 @@
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\WebApi\obj\Release\WebApi.csprojAssemblyReference.cache
+C:\Users\Jacew\Source\Repos\Jace-SPS-CUNY-Project0\PhoneAppRepo\WebApi\obj\Release\WebApi.csproj.CoreCompileInputs.cache

@@ -21,7 +21,7 @@ namespace PhoneApp
         public int ContactId { get => contactId; set => contactId = value; }
         public int Age { get => age; set => age = value; }
         public long PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
-        internal Address Address { get => address; set => address = value; }
+        public Address Address { get => address; set => address = value; }
 
         public Contact() { }
         public Contact(Address a)
