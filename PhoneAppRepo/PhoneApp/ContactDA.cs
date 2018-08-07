@@ -32,15 +32,16 @@ namespace PhoneApp
                         Contact contact = null;
                         foreach (var item in AddressDA.AddList)
                         {
-                            if (item.AddressID == (int)data[5])
+                            if (item.AddressID == (int)data[6])
                             {
                                 contact = new Contact(
                                     (string)data[1],
                                     (string)data[2],
                                     (int)data[3],
                                     (string)data[4],
-                                    (int)data[5],
-                                    (long)data[6],
+                                    (string)data[5],
+                                    (int)data[6],
+                                    (long)data[7],
                                     item);
                             }
                         }
@@ -62,8 +63,8 @@ namespace PhoneApp
         public static void insert(Contact c)
         {
             //Create Query Statment using Parmeterized SQL
-            string command = $"INSERT INTO dbo.Contacts (FIRST_NAME, LAST_NAME, AGE, GENDER, ADDRESS_ID, PHONE_NUMBER) " +
-                      $"VALUES (@firstName, @lastName, @age, @gender, @addressID, @phoneNumber)";
+            string command = $"INSERT INTO dbo.Contacts (FIRST_NAME, LAST_NAME, AGE, GENDER, EMAIL, ADDRESS_ID, PHONE_NUMBER) " +
+                      $"VALUES (@firstName, @lastName, @age, @gender, @email, @addressID, @phoneNumber)";
             //Establish a New Connection
             using (connect = new SqlConnection(conString))
             {
@@ -81,6 +82,7 @@ namespace PhoneApp
                             sqlCommand.Parameters.AddWithValue("@lastName", c.LName);
                             sqlCommand.Parameters.AddWithValue("@age", c.Age);
                             sqlCommand.Parameters.AddWithValue("@gender", c.Gender);
+                            sqlCommand.Parameters.AddWithValue("@email", c.Email);
                             sqlCommand.Parameters.AddWithValue("@addressID", c.AddressID);
                             sqlCommand.Parameters.AddWithValue("@phoneNumber", c.PhoneNumber);
                             sqlCommand.ExecuteNonQuery();
@@ -164,7 +166,6 @@ namespace PhoneApp
                             connect.Close();
                         };
                     }
-
                 }
                 catch (Exception ex)
                 {
