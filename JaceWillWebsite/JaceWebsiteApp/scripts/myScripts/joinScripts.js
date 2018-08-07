@@ -134,3 +134,19 @@ function zipCodeApi(element) {
     ajaxRequest.open("GET", url, true);
     ajaxRequest.send();
 }
+
+function postContact() {
+    var contact = {
+
+        "FName": document.getElementById("firstName"),
+        "LName": document.getElementById("lastName"),
+        "Gender": gender,
+        "Age": document.getElementById("age"),
+        "PhoneNumber": document.getElementById("phone"),
+        "Age": document.getElementById("age"),
+        "": document.getElementById("age"),
+        "CountryID": document.getElementById("CountryName"),
+        "CountryCode": document.getElementById("cCode")
+    }
+    var Address
+}

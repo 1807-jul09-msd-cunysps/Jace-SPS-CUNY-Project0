@@ -32,13 +32,17 @@
                     <fieldset class="col-md-12">
                         <legend>Info</legend>
                         <div class="form-row">
-                            <div class="col-xl-5 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <input id="firstName" class="form-control" type="text" placeholder="First Name" onblur="validateFLNames('firstName', 'lastName')" required />
                                 <div id="firstNameValidate"></div>
                             </div>
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <input id="lastName" class="form-control" type="text" placeholder="Last Name" onblur="validateFLNames('lastName', 'firstName')" required />
                                 <div id="lastNameValidate"></div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <input id="age" class="form-control" type="text" placeholder="Age" onblur="validateNumbers(this)" required />
+                                <div id="ageValidate"></div>
                             </div>
                             <div class="col-md-1 mb-3">
                                 <input id="maleBtn" class="btn btn-dark" style="display:inline-block;" type="button" name="gender" value="male" onclick="genderSelect(this)"/> <br />
