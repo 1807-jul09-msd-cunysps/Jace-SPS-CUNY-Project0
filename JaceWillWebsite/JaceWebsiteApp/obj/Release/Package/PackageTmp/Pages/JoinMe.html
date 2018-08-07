@@ -9,9 +9,10 @@
     <script src="scripts/jquery-3.0.0.slim.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="../scripts/umd/popper.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../scripts/myScripts/joinScripts.js"></script>
-    <title>Jace I. Williams</title>
+
+    <title>Jace I. Williams|Register</title>
 </head>
 <body>
     <div class="pageContainer">
@@ -21,30 +22,33 @@
                 <a class="menu" href="../Pages/Home.html">Home</a>
                 <a class="menu" href="../Pages/About.Html">About Me</a>
                 <a class="menu" href="../Pages/Contact.html">Contact</a>
-                <a class="menu" href="../Pages/JoinMe.html">Join Me</a>
-                <a class="menu menuRegister" href="../Register.html">Register</a>
+                <a class="menu active" href="../Pages/JoinMe.html">Join Me</a>
             </div>
         </div>
         <div class="content">
-            <form style="background-color:#dadada;margin-top: 20px;" action="">
+            <form id="myForm" onsubmit="return false" style="background-color:#dadada;margin-top: 20px;" action="">
                 <div id="joinMeForm" class="form-group">
 
                     <fieldset class="col-md-12">
                         <legend>Info</legend>
                         <div class="form-row">
-                            <div class="col-xl-5 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <input id="firstName" class="form-control" type="text" placeholder="First Name" onblur="validateFLNames('firstName', 'lastName')" required />
                                 <div id="firstNameValidate"></div>
                             </div>
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <input id="lastName" class="form-control" type="text" placeholder="Last Name" onblur="validateFLNames('lastName', 'firstName')" required />
                                 <div id="lastNameValidate"></div>
                             </div>
-                            <div class="col-md-1 mb-3">
-                                <input id="maleBtn" class="btn btn-dark" style="display:inline-block;" type="button" name="gender" value="male" onclick="genderSelect(this)"/> <br />
+                            <div class="col-md-2 mb-3">
+                                <input id="age" class="form-control" type="text" placeholder="Age" onblur="validateNumbers(this)" required />
+                                <div id="ageValidate"></div>
                             </div>
                             <div class="col-md-1 mb-3">
-                                <input id="femaleBtn" class="btn" style="display:inline-block;" type="button" name="gender" value="female" onclick="genderSelect(this)"/> <br />
+                                <input id="maleBtn" class="btn btn-dark" style="display:inline-block;" type="button" name="gender" value="male" onclick="genderSelect(this)" /> <br />
+                            </div>
+                            <div class="col-md-1 mb-3">
+                                <input id="femaleBtn" class="btn" style="display:inline-block;" type="button" name="gender" value="female" onclick="genderSelect(this)" /> <br />
                             </div>
                         </div>
                     </fieldset>
@@ -52,7 +56,7 @@
                         <legend> Address </legend>
                         <div class="form-row">
                             <div class="col-md-5 mb-3">
-                                <input id="address1" class="form-control" placeholder="Address Line 1" type="text" required />
+                                <input id="address1" class="form-control" placeholder="Address Line 1" Broadway Ave" type="text" required />
                                 <div id="address1Validate"></div>
                             </div>
                             <div class="col-md-5 mb-3">
@@ -60,7 +64,7 @@
                                 <div id="address2Validate"></div>
                             </div>
                             <div class="col-md-2 mb-3">
-                                <input id="zip" class="form-control" placeholder="ZipCode" type="text" onblur="validateNumbers(this)" required />
+                                <input id="zip" class="form-control" placeholder="ZipCode" type="text" onblur="validateZip(this)" required />
                                 <div id="zipValidate"></div>
                             </div>
                         </div>
@@ -92,7 +96,7 @@
                         <legend>Details</legend>
                         <div class="form-row" style="padding-top:20px;">
                             <div class="col-md-2 mb-3">
-                                <input id="cCode" class="form-control" placeholder="Country Code" onblur="validateNumbers(this)" type="text" required/>
+                                <input id="cCode" class="form-control" placeholder="Country Code" onblur="validateNumbers(this)" type="text" required />
                                 <div id="cCodeValidate"></div>
                             </div>
                             <div class="col-md-3 mb-3">
@@ -108,7 +112,7 @@
                                 <div id="emailValidate"></div>
                             </div>
                             <div class="col-md-1 mb-3">
-                                <input id="submit" class="btn btn-primary" type="submit" value="Submit" required />
+                                <input id="submit" class="btn btn-primary" type="submit" value="Submit" onclick="postContact()" required />
                                 <div id="emailValidate"></div>
                             </div>
                         </div>
