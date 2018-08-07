@@ -145,7 +145,7 @@ namespace PhoneApp
                                         Console.WriteLine(":::::Add Contact:::::");
                                         Console.WriteLine();
 
-                                        string fname, lname, gender, state, city, countryName, addressSt;
+                                        string fname, lname, gender, email, state, city, countryName, addressSt;
                                         int age, zip, countryCode;
                                         long phoneNum;
                                         Console.WriteLine("First Name:");
@@ -156,6 +156,9 @@ namespace PhoneApp
 
                                         Console.WriteLine("Gender (Male , Female):");
                                         gender = Console.ReadLine();
+
+                                        Console.WriteLine("Email:");
+                                        email = Console.ReadLine();
 
                                         Console.WriteLine("Phone Number:");
                                         phoneNum = Convert.ToInt64(Console.ReadLine());
@@ -208,7 +211,7 @@ namespace PhoneApp
                                             }
                                             Address a = new Address(addressSt, city, state, zip, c.CountryID, c);
                                             AddressDA.insert(a);
-                                            Contact con = new Contact(fname, lname, age, gender, a.AddressID, phoneNum, a);
+                                            Contact con = new Contact(fname, lname, age, gender, email, a.AddressID, phoneNum, a);
                                             ContactDA.insert(con);
                                             myPhone.contactList.Add(con);
                                             currMenu = mainMenu + "\n \n Contact Added!";

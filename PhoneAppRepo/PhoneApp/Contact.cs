@@ -8,7 +8,7 @@ namespace PhoneApp
 {
 	public class Contact
 	{
-		string fName, lName, gender;
+		string fName, lName, gender, email;
         int contactId, age, addressID;
         long phoneNumber;
 
@@ -17,6 +17,7 @@ namespace PhoneApp
         public string FName { get => fName; set => fName = value; }
         public string LName { get => lName; set => lName = value; }
         public string Gender { get => gender; set => gender = value; }
+        public string Email { get => email; set => email = value; }
         public int AddressID { get => addressID; set => addressID = value; }
         public int ContactId { get => contactId; set => contactId = value; }
         public int Age { get => age; set => age = value; }
@@ -29,11 +30,12 @@ namespace PhoneApp
             this.address = a;
         }
 
-        public Contact(string fName, string lName, int age, string gender, int addressID, long phoneNumber, Address a)
+        public Contact(string fName, string lName, int age, string gender, string email, int addressID, long phoneNumber, Address a)
         {
             this.fName = fName;
             this.lName = lName;
             this.gender = gender;
+            this.email = email;
             this.addressID = addressID;
             this.age = age;
             this.phoneNumber = phoneNumber;
@@ -47,6 +49,7 @@ namespace PhoneApp
             str += $"First Name: {this.FName} \n";
             str += $"Last Name: {this.LName} \n";
             str += $"Gender: {this.Gender} \n";
+            str += $"Email: {this.Email} \n";
             str += $"Age: {this.Age} \n";
             str += $"Phone Number: {this.PhoneNumber} \n";
             foreach (var item in AddressDA.AddList)

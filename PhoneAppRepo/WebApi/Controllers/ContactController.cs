@@ -26,6 +26,7 @@ namespace WebApi.Controllers
         [HttpPost] //Insert to Database
         public IHttpActionResult Post([FromBody]Contact postContact)
         {
+            ContactDA.read();
             if (postContact != null)
             {
                 Country country = null;
@@ -51,10 +52,11 @@ namespace WebApi.Controllers
                 Address a = new Address(postContact.Address.AddressST, postContact.Address.City, postContact.Address.State, postContact.Address.ZipCode,country.CountryID, country);
                 AddressDA.insert(a);
                 Contact con = new Contact(
-                    postContact.FName, 
-                    postContact.LName, 
-                    postContact.Age, 
+                    postContact.FName,
+                    postContact.LName,
+                    postContact.Age,
                     postContact.Gender,
+                    postContact.Email,
                     a.AddressID,
                     postContact.PhoneNumber,
                     a);
