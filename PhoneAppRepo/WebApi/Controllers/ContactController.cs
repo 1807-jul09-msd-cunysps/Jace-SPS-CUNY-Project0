@@ -10,10 +10,18 @@ namespace WebApi.Controllers
     public class ContactController : ApiController
     {
         [HttpGet] //View or Read Database
-        public IEnumerable<Contact> Get()
+        public IHttpActionResult Get()
         {
-            var contacts = ContactDA.read();
-            return contacts;
+            try
+            {
+                var contacts = ContactDA.read();
+                return Json(contacts);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+                throw;
+            }
         }
         [HttpPost] //Insert to Database
         public IHttpActionResult Post([FromBody]Contact postContact)
