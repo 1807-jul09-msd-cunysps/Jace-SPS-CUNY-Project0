@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Contoso | Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../Style/style.css" />
+    <script src="../Scripts/register.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="Home.html" class="nav_logo">Contoso Mortgage</a>
+        <a href="Register.html" class="nav_ele">About</a>
+        <a href="Register.html" class="nav_ele">Register</a>
+        <a href="Register.html" class="nav_ele">Account</a>
+    </nav>
+    <form id="registerForm" class="col-md-8 mb-3" onsubmit="return false;" action="">
+        <div class="form-row">
+            <div class="col-md-6">
+                <label>First:</label>
+                <input id="FirstName" class="form-control" type="text" onblur="validateChars(this)" />
+                <div id="FirstNameValidate" class="validation"></div>
+            </div>
+            <div class="col-md-6">
+                <label>Last:</label>
+                <input id="LastName" class="form-control" type="text" onblur="validateChars(this)" />
+                <div id="LastNameValidate" class="validation"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label>SSN:</label>
+                <input id="SSN" class="form-control" type="text" onblur="validateSSN(this)" />
+                <div id="SSNValidate" class="validation"></div>
+            </div>
+            <div class="col-md-6">
+                <label>Email:</label>
+                <input id="Email" class="form-control" type="text" />
+                <div id="EmailValidate" class="validation"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label>MobilePhone:</label>
+                <input id="MobilePhone" class="form-control" type="text" onblur="validatePhone(this)" />
+                <div id="MobilePhoneValidate" class="validation"></div>
+            </div>
+            <div class="col-md-6">
+                <label>Business Phone:</label>
+                <input id="BusinessPhone" class="form-control" type="text" onblur="validatePhone(this)" />
+                <div id="BusinessPhoneValidate" class="validation"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label>Address Line 1:</label>
+                <input id="AddressLine1" class="form-control" type="text" onblur="validate"/>
+                <div id="AddressLine1Validate" class="validation"></div>
+            </div>
+            <div class="col-md-6">
+                <label>Address Line 2:</label>
+                <input id="AddressLine2" class="form-control" type="text" />
+                <div id="AddressLine2Validate" class="validation"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label>City:</label>
+                <input id="City" class="form-control" type="text" onblur="validateChars(this)" />
+                <div id="CityValidate" class="validation"></div>
+            </div>
+            <div class="col-md-6">
+                <label>State:</label>
+                <input id="State" class="form-control" type="text" onblur="validateChars(this)" />
+                <div id="StateValidate" class="validation"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label>Country:</label>
+                <input id="Country" class="form-control" type="text" onblur="validateChars(this)" />
+                <div id="CountryValidate" class="validation"></div>
+            </div>
+            <div class="col-md-6">
+                <label>Zip Code:</label>
+                <input id="ZipCode" class="form-control" type="text" onblur="validateNumbers(this)" />
+                <div id="ZipCodeValidate" class="validation"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <input id="Submit" class="btn btn-primary" type="submit" value="Submit" onclick="submitForm()" />
+            <div id="SubmitValidate" class="validation"></div>
+        </div>
+    </form>
+    <div></div>
+    <footer></footer>
+</body>
+</html>
