@@ -2,13 +2,13 @@
     padding: 0px;
     margin: 0px;
     height: 1000px;
-    background-color: aqua;
+    background-color: #ffffff;
 }
 form {
-    background-color: blue;
-    height: 600px;
-    margin: auto;
-    margin-top: 70px;
+    box-shadow: 5px 5px 5px 5px #dadada;
+    height: auto;
+    padding: 25px;
+    margin: 100px auto 0px auto;
 }
 nav{
     background-color: #484848;
@@ -103,6 +103,6 @@ nav{
     height: 400px;
     display: block;
 }
-validation{
+.validation{
     color: red;
 }

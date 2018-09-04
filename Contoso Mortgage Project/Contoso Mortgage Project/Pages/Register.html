@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-6">
                 <label>Email:</label>
-                <input id="Email" class="form-control" type="text" />
+                <input id="Email" class="form-control" type="text" onblur="validate(this)"/>
                 <div id="EmailValidate" class="validation"></div>
             </div>
         </div>
@@ -54,12 +54,12 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label>Address Line 1:</label>
-                <input id="AddressLine1" class="form-control" type="text" onblur="validate"/>
+                <input id="AddressLine1" class="form-control" type="text" onblur="validate(this)"/>
                 <div id="AddressLine1Validate" class="validation"></div>
             </div>
             <div class="col-md-6">
                 <label>Address Line 2:</label>
-                <input id="AddressLine2" class="form-control" type="text" />
+                <input id="AddressLine2" class="form-control" type="text" onblur="validate(this)"/>
                 <div id="AddressLine2Validate" class="validation"></div>
             </div>
         </div>
@@ -88,8 +88,8 @@
             </div>
         </div>
         <div class="form-row">
-            <input id="Submit" class="btn btn-primary" type="submit" value="Submit" onclick="submitForm()" />
-            <div id="SubmitValidate" class="validation"></div>
+            <input id="Submit" style="margin-top:20px;" class="btn btn-primary float-right" type="submit" value="Submit" onclick="submitForm()" />
+            <div id="SubmitValidate" style="margin:25px;" class="validation"></div>
         </div>
     </form>
     <div></div>
