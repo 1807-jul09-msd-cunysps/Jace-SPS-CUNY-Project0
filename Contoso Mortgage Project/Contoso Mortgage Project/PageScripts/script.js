@@ -2,6 +2,10 @@
 //Check User URL: http://team3webapi.azurewebsites.net/api/checkuser  SUPPORT: POST & GET
 //Create User Post:  http://team3webapi.azurewebsites.net/api/userlogin
 
+//OnLoad Variables
+//variables to store returned ContactGUID and Mortgage Account Number
+var contactID, contactObj, mortgageList;
+
 //Global Variables/ Objects
 var signinFields = {
     UserName: false,
@@ -17,9 +21,136 @@ var passwordValidation = {
     numbers: false
 };
 
-//Sign In Functionality=========================================================
+//Page Load Functions======================================================================================
 
-window.onload = checkSession;
+//on Page load call checkSessionLoad()
+//window.onload = checkSessionLoad;
+
+function loadInfo(currentPage) {
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            contactObj = JSON.parse(this.responseText);
+            switch (currentPage) {
+                case "home":
+                    loadHomeInfo();
+                    break;
+                case "account":
+                    loadAccountInfo();
+                    break;
+                default:
+            }
+        } else {
+            contactObj = "An Error Has Occured";
+            loadAccountInfo();
+        }
+    };
+    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/user/" + contactID, true);
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.send();
+}
+function loadMortgages() {
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            mortgageList = JSON.parse(this.responseText);
+
+            for (var i = 0; i < mortgageLis.length; i++) {
+                let element = document.createElement("DIV");
+                element.classList.add("mortgage_list");
+            }
+
+        } else {
+            contactObj = "An Error Has Occured";
+            loadAccountInfo();
+        }
+    };
+    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/mortgage/" + contactID, true);
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.send();
+}
+
+function loadHomeInfo() {
+    document.getElementById("sign_in").classList.add("no_display");
+    document.getElementById("account").classList.remove("no_display");
+}
+
+function loadAccountInfo() {
+    //var result = typeof contactObj;
+    if (typeof contactObj === 'string') {
+        document.getElementById("error").classList.remove("hidden");
+        document.getElementById("error").innerHTML = contactObj;
+    } else {
+        document.getElementById("error").classList.add("hidden");
+        document.getElementById("accountContainer").classList.remove("hidden");
+        document.getElementById("hello").innerHTML = "Hello " + contactObj["firstname"];
+        loadMortgages();
+    }
+
+}
+
+//Cookie Functions==============================================================
+
+//Session Cookie Functions======================================================
+function setSession(cGUID, cUser) {
+    let sesObj = {
+        "GUID": cGUID.substring(1, cGUID.length - 1),
+        "username": cUser
+    };
+    document.cookie = "user=" + JSON.stringify(sesObj) + ";" + "path=/";
+    window.location.replace("/Pages/Account.html");
+}
+
+function getSession(cName) {
+    cName = cName + "=";
+    let cookieList = document.cookie.split(";");
+    for (var i = 0; i < cookieList.length; i++) {
+        let cookie = cookieList[i];
+        if (cookie === "") { continue; }
+        while (cookie.charAt(0) === "") {
+            cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(cName) === 0) {
+            let result = cookie.substring(cName.length, cookie.length);
+            return result;
+        }
+    }
+    return false;
+}
+
+function delSession() {
+    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function checkSessionLoad(currentPage) {
+    let value = getSession("user");
+    if (value !== false) {
+        let userObj = JSON.parse(value);
+        contactID = userObj["GUID"];
+        switch (currentPage) {
+            case "home":
+                loadHomeInfo();
+                break;
+            case "account":
+                break;
+            default:
+        }
+        loadInfo(currentPage);
+    }
+}
+
+function checkSession(cName) {
+    let value = getSession(cName);
+    if (value !== false) {
+        let userObj = JSON.parse(value);
+        alert(cName + ":" + userObj["username"]);
+    } else {
+        alert("No Value Found");
+    }
+}
+
+
+//Sign In Functionality=========================================================
 
 function selectformSignIn(value) {
     if (value) {
@@ -44,53 +175,12 @@ function formSignInSubmit() {
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
             setSession(this.responseText, signInObj.UserName);
         } else if (xmlHttp.readyState === 4 && xmlHttp.status === 400) {
-                let result = this.responseText;
+            let result = JSON.parse(this.responseText);
+            document.getElementById("signInSubmitValidate").innerHTML = result["Message"];
         }
     };
 }
-
-function setSession(cGUID, cUser) {
-    let sesObj = {
-        "GUID": cGUID.substring(1, cGUID.length - 1),
-        "username": cUser
-    };
-    document.cookie = "user=" + JSON.stringify(sesObj) + ";" + "path=/";
-    window.location.replace("/Account.html");
-
-}
-
-function getSession(cName) {
-    cName = cName + "=";
-    let cookieList = document.cookie.split(";");
-    for (var i = 0; i < cookieList.length; i++) {
-        let cookie = cookieList[i];
-        if (cookie === "") { continue;}
-        while (cookie.charAt(0) === "") {
-            cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(cName) === 0) {
-            let result = cookie.substring(cName.length, cookie.length);
-            return result;
-        }
-    }
-    return false;
-}
-
-function delSession() {
-    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
-
-function checkSession() {
-    let value = getSession("user");
-    if (value !== false) {
-        let userObj = JSON.parse(value);
-        //alert(cName + ":" + userObj["username"]);
-    } else {
-        //alert("No Value Found");
-    }
-}
-
-
+//Register Funcitonality=========================================================
 function selectformRegister(value) {
     if (value) {
         document.getElementById("formRegister").classList.remove("hidden");
@@ -172,6 +262,10 @@ function passwordFormat(element) {
     validateHelp("numbers", numbers);
 }
 
+function showHelp() {
+    document.getElementById("help").classList.remove("hidden");
+}
+
 function validateHelp(elementID, valid) {
     if (valid) {
         document.getElementById(elementID).classList.add("help_element_valid");
@@ -235,10 +329,6 @@ function validatePassword(element, element2) {
     document.getElementById("help").classList.add("hidden");
 }
 
-function showHelp() {
-    document.getElementById("help").classList.remove("hidden");
-}
-
 function validateMortgage(element) {
     let text = "";
     let results = false;
@@ -295,22 +385,3 @@ function formRegisterSubmit() {
         document.getElementById("registerSubmitValidate").innerHTML = "There are errors on the form.";
     }
 }
-
-
-
-//let xmlHttp = new XMLHttpRequest();
-//xmlHttp.onreadystatechange = function () {
-//    if (this.readyState === 4 & this.status === 200) {
-//        result = this.responseText;
-//        result = result.substring(1, result.length - 1);
-//        if (result === "Success") {
-//            signinFields["UserName"] = userName;
-//            element.classList.remove("is-invalid");
-//        } else {
-//            element.classList.add("is-invalid");
-//        }
-//    }
-//};
-//xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/" + userName, true);
-//xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//xmlHttp.send();

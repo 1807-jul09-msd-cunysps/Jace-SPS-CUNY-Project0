@@ -1,19 +1,22 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Contoso | Home</title>
-    <link rel="stylesheet" type="text/css" href="../Style/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../Style/style.css" />
+    <script src="../PageScripts/script.js"></script>
 </head>
-<body>
+<body onload="checkSessionLoad('home')">
     <nav>
         <a href="Home.html" class="nav_logo">Contoso Mortgage</a>
-        <a href="SignIn.html" class="nav_ele">Sign In</a>
+        <a id="sign_in" href="SignIn.html" class="nav_ele">Sign In</a>
+        <a id="account" href="Account.html" class="nav_ele no_display">Account</a>
         <a href="About.html" class="nav_ele">About Us</a>
         <a href="Apply.html" class="nav_ele">Apply for Loan</a>
         <a href="Help.html" class="nav_ele">Help</a>
     </nav>
-    <div id="slideShow">
+    <div id="slideShow" class="col-md-12">
         <div id="slide1" class="slide" style="z-index:4;position:absolute;">
             <img class="slidesNorm" src="./pics/slide1.jpg" alt="SUNY Morrisville" class="slide" style="z-index:1;">
             <img class="slidesMobile" src="./pics/mslide1.jpg" alt="SUNY Morrisville" class="slide" style="z-index:1;">

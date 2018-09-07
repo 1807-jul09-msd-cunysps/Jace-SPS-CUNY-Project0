@@ -50,6 +50,7 @@ form {
 .help_element_valid {
     border-bottom: 2px solid #4cff00;
 }
+
 .hidden {
     visibility: hidden;
 }
@@ -95,6 +96,12 @@ nav{
     left: 0px;
     z-index:999;
 }
+.nav_account_ele {
+    float: left;
+    width: auto;
+    height:auto;
+    margin: 10px;
+}
 
 .nav_logo {
     color: #ffffff;
@@ -115,7 +122,9 @@ nav{
     text-decoration: none;
     float: right;
 }
-
+.no_display {
+    display: none;
+}
 .nav_logo:hover, .nav_ele:hover {
     background-color: gray;
     color: #ffffff;
