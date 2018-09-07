@@ -6,6 +6,10 @@ function AccountLoad() {
     alert(Xrm.Page.getAttribute("name").getValue());
 }
 
+function btnClick() {
+    Xrm.Page.ui.setFormNotification("You clicked a button.", "INFORMATION", "helloMsg2");
+}
+
 function ValidatePhone() {
     var type = Xrm.Page.ui.getFormType();
     if (type === 1 || type === 2) {
