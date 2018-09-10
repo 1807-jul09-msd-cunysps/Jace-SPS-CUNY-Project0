@@ -23,7 +23,7 @@ var formFields = {
     Option: true
 };
 //variables to store returned ContactGUID and Mortgage Account Number
-var contactID, mortgageResult;
+var contactID, mortgageResult, files = [], files64 = [];
 
 //Validation====================================================
 function validatePasswordLength(string) {
@@ -189,9 +189,11 @@ function formContactSubmit() {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 contactID = this.response;
                 contactID = contactID.substring(1, contactID.length - 1);
-
+                document.getElementById("formMortgage").classList.remove("hiddenForm");
+                document.getElementById("formContact").classList.add("fadeOutNext");
             }
         };
+
         document.getElementById("formMortgage").classList.remove("hiddenForm");
         document.getElementById("formContact").classList.add("fadeOutNext");
 
@@ -235,7 +237,8 @@ function formMortgageSubmit() {
     if (clearedValidation) {
         //Ajax call
         document.getElementById("SubmitValidate").innerHTML = "";
-        let mortgageObj = { ContactID: contactID };
+        //let mortgageObj = { ContactID: contactID };
+        let mortgageObj = { ContactID: "ddb4b385-3fb1-e811-a96b-000d3a1ca939" };
         for (let i = 0; i < fields.length; i++) {
             switch (fields[i]) {
                 case "MortgageAmount":
@@ -255,13 +258,95 @@ function formMortgageSubmit() {
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 mortgageResult = this.responseText;
-
+                for (var i = 0; i < files.length; i++) {
+                    let fileObj = {
+                        "ContactID": "ddb4b385-3fb1-e811-a96b-000d3a1ca939",
+                        //"ContactID": contactID,
+                        "Base64Data": files[i].file64,
+                        "Type": files[i].file.type,
+                        "FileName": files[i].file.name
+                    }
+                    uploadFiles(fileObj);
+                }
+                //window.location.replace("/Pages/SignIn.html");
             }
         };
-
-        document.getElementById("formDocuments").classList.remove("hiddenForm");
-        document.getElementById("formMortgage").classList.add("fadeOutNext");
     } else {
         document.getElementById("SubmitValidate").innerHTML = "There are errors on the form.";
     }
 }
+
+function uploadFiles(fileObj) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/note", true);
+    xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlHttp.send(JSON.stringify(fileObj));
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            let results = this.responseText;
+        }
+    };
+}
+
+function handleFileInput(element) {
+    let fileObj = { "file": element.files[0] };
+
+    let reader = new FileReader();
+    reader.readAsDataURL(element.files[0]);
+    reader.onload = function () {
+        let index = reader.result.indexOf("base64,");
+        index += 7;
+        let result = reader.result.substring(index, reader.result.length);
+
+        fileObj["file64"] = result;
+        files.push(fileObj);
+
+        let names = "";
+        let fileLabel = document.createElement("span");
+        fileLabel.id = element.files[0].name
+        fileLabel.classList.add("file_label");
+        fileLabel.classList.add("label");
+        fileLabel.classList.add("label-default");
+        fileLabel.innerHTML = element.files[0].name;
+        fileLabel.onclick = removeFile.bind(this, element.files[0].name)
+        document.getElementById("files").appendChild(fileLabel);
+    };
+    reader.onerror = function () {
+        document.getElementById("filesValidate").innerHTML = "Error Uplode: " + element.files[0].name; 
+        console.log('Error:', error);
+    }
+}
+function removeFile(file) {
+    for (var i = 0; i < files.length; i++) {
+        if (files[i]["file"].name === file) {
+            files.splice(i, 1);
+        }
+    }
+    let element = document.getElementById(file);
+    document.getElementById("files").removeChild(element);
+}
+
+//function addBase64(file) {
+//    let reader = new FileReader();
+//    reader.readAsDataURL(file);
+//    reader.onload = function () {
+//        file64.push(reader.result);
+//    };
+//    reader.onerror = function () {
+//        console.log('Error:', error);
+//    }
+//}
+//function deleteBase64(file) {
+//    let reader = new FileReader();
+//    reader.readAsDataURL(file);
+//    reader.onload = function () {
+//        for (var i = 0; i < files64.length; i++) {
+//            if (files64[i] === reader.result) {
+//                files64.splice(i, 1);
+//            }
+//        }
+//    };
+//    reader.onerror = function () {
+//        console.log('Error:', error);
+//    }
+//}

@@ -17,75 +17,76 @@
     </nav>
 
     <form id="formContact" class="animate form_apply" style="z-index:3;" onsubmit="return false;" action="">
+        <h2>Information</h2>
         <div class="form-row">
             <div class="col-md-6">
                 <label>First:</label>
-                <input id="FirstName" class="form-control" type="text" onblur="validateChars(this)" value="Johnny" />
+                <input id="FirstName" class="form-control" type="text" onblur="validateChars(this)"/>
                 <div id="FirstNameValidate" class="validation"></div>
             </div>
             <div class="col-md-6">
                 <label>Last:</label>
-                <input id="LastName" class="form-control" type="text" onblur="validateChars(this)" value="Blaze" />
+                <input id="LastName" class="form-control" type="text" onblur="validateChars(this)"/>
                 <div id="LastNameValidate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6">
                 <label>SSN:</label>
-                <input id="SSN" class="form-control" type="text" onblur="validateSSN(this)" value="987645123" />
+                <input id="SSN" class="form-control" type="text" onblur="validateSSN(this)"/>
                 <div id="SSNValidate" class="validation"></div>
             </div>
             <div class="col-md-6">
                 <label>Email:</label>
-                <input id="Email" class="form-control" type="text" onblur="validate(this)" value="JohnnyB@gmail.com" />
+                <input id="Email" class="form-control" type="text" onblur="validate(this)" />
                 <div id="EmailValidate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6">
                 <label>MobilePhone:</label>
-                <input id="MobilePhone" class="form-control" type="text" onblur="validatePhone(this)" value="1112223333" />
+                <input id="MobilePhone" class="form-control" type="text" onblur="validatePhone(this)" />
                 <div id="MobilePhoneValidate" class="validation"></div>
             </div>
             <div class="col-md-6">
                 <label>Business Phone:</label>
-                <input id="BusinessPhone" class="form-control" type="text" onblur="validatePhone(this)" value="9998887777" />
+                <input id="BusinessPhone" class="form-control" type="text" onblur="validatePhone(this)" />
                 <div id="BusinessPhoneValidate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6">
                 <label>Address Line 1:</label>
-                <input id="AddressLine1" class="form-control" type="text" onblur="validate(this)" value="123 Address St" />
+                <input id="AddressLine1" class="form-control" type="text" onblur="validate(this)"/>
                 <div id="AddressLine1Validate" class="validation"></div>
             </div>
             <div class="col-md-6">
                 <label>Address Line 2:</label>
-                <input id="AddressLine2" class="form-control" type="text" onblur="validate(this)" value="456-9" />
+                <input id="AddressLine2" class="form-control" type="text" onblur="validate(this)" />
                 <div id="AddressLine2Validate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6">
                 <label>City:</label>
-                <input id="City" class="form-control" type="text" onblur="validateChars(this)" value="New York" />
+                <input id="City" class="form-control" type="text" onblur="validateChars(this)"  />
                 <div id="CityValidate" class="validation"></div>
             </div>
             <div class="col-md-6">
                 <label>State:</label>
-                <input id="State" class="form-control" type="text" onblur="validateChars(this)" value="New York" />
+                <input id="State" class="form-control" type="text" onblur="validateChars(this)" />
                 <div id="StateValidate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6">
                 <label>Country:</label>
-                <input id="Country" class="form-control" type="text" onblur="validateChars(this)" value="USA" />
+                <input id="Country" class="form-control" type="text" onblur="validateChars(this)"/>
                 <div id="CountryValidate" class="validation"></div>
             </div>
             <div class="col-md-6">
                 <label>Zip Code:</label>
-                <input id="ZipCode" class="form-control" type="text" onblur="validateNumbers(this)" value="12345" />
+                <input id="ZipCode" class="form-control" type="text" onblur="validateNumbers(this)" />
                 <div id="ZipCodeValidate" class="validation"></div>
             </div>
         </div>
@@ -95,7 +96,8 @@
         </div>
     </form>
 
-    <form id="formMortgage" style="z-index:5;" class="hiddenForm" onsubmit="return false;" action="">
+    <form id="formMortgage" style="z-index:2;" class="hiddenForm form_apply" onsubmit="return false;" action="">
+        <h2>Loan Detials</h2>
         <div class="form-row">
             <div class="col-md-6">
                 <label>Mortgage Name</label>
@@ -114,19 +116,24 @@
                 <select id="Option" class="form-control">
                     <option value="273250000">10 years</option>
                     <option value="273250001">20 years</option>
-                    <option value="373250002">30 years</option>
+                    <option value="273250002">30 years</option>
                 </select>
                 <div id="OptionValidate" class="validation"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label class="btn">
+                    Upload File(s) <input id="fileUplaod" type="file" accept="" onchange="handleFileInput(this)" multiple hidden>
+                    <label id="files"></label>
+                </label>
+                <label id="filesValidate"></label>
             </div>
         </div>
         <div class="form-row">
             <input style="margin:20px;text-align:right;" class="btn btn-primary pull-right" type="submit" value="Next" onclick="formMortgageSubmit()" />
             <div id="SubmitValidate" style="margin:25px;" class="validation"></div>
         </div>
-    </form>
-    
-    <form id="formDocuments"  style="z-index:1;" class="hiddenForm" onsubmit="return false;" action="">
-        Upload Documents
     </form>
 
     <div></div>

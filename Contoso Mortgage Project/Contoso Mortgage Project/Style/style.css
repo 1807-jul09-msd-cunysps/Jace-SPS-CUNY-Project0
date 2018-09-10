@@ -1,18 +1,52 @@
 ﻿
+#accountContainer {
+    background-color: #ffffff;
+    height: auto;
+    min-height: 500px;
+    padding: 10px;
+    margin: 100px auto;
+    text-align: center;
+    box-shadow: 5px 5px 5px 5px #dadada;
+}
+
+#accountPanel {
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: auto;
+    min-height: 70%;
+    margin: 8% 25%;
+    background-color: #ffffff;
+}
+
+.account_row {
+    padding-left: 20px;
+    margin: 20px;
+    height: 40px;
+    border-bottom: 2px solid #dadada;
+    text-align:left;
+}
 .animate {
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
     -o-transition: all 1s ease;
     transition: all 1s ease;
 }
-
+.btn_row {
+    padding-left: 20px;
+    margin-top: 10%;
+}
 body {
     padding: 70px 0px 0px 0px;
     margin: 0px;
     height: auto;
     background-color: #ffffff;
 }
+#description {
 
+}
 form {
     min-width: 250px;
     position: absolute;
@@ -29,35 +63,9 @@ form {
 
 .form_sign_in {
     width: 40%;
+    height: auto;
     min-height: 400px;
     margin: 125px 30% 0px 30%;
-}
-#formRegister {
-    height: auto
-}
-#help {
-    width: auto;
-    height: auto;
-    position: absolute;
-    padding: 10px;
-    margin: 300px 15%;
-    box-shadow: 5px 1px 10px #dadada;
-}
-.help_element_invalid {
-    border-bottom: 2px solid #ff0000;
-}
-
-.help_element_valid {
-    border-bottom: 2px solid #4cff00;
-}
-
-.hidden {
-    visibility: hidden;
-}
-.hiddenForm {
-    margin-left: 100%;
-    visibility: hidden;
-    opacity: 0;
 }
 
 .fadeInNext {
@@ -86,15 +94,72 @@ form {
     left: +50px;
     transition: visibility 0s 1s, opacity 1s linear;
 }
+.file_label {
+    margin: 0px 5px;
+    text-decoration: underline;
+}
+footer {
+    background-color: #484848;
+    height: auto;
+    color: #ffffff;
+    font-size:small;
+    padding-bottom:20px;
+}
 
-nav{
+#help {
+    width: auto;
+    height: auto;
+    position: absolute;
+    padding: 10px;
+    margin: 300px 15%;
+    box-shadow: 5px 1px 10px #dadada;
+}
+.help_element_invalid {
+    border-bottom: 2px solid #ff0000;
+}
+
+.help_element_valid {
+    border-bottom: 2px solid #4cff00;
+}
+
+.hidden {
+    visibility: hidden;
+}
+.hiddenForm {
+    margin-left: 100%;
+    visibility: hidden;
+    opacity: 0;
+}
+.mortgage_account {
+    cursor: pointer;
+    background-color: #484848;
+    height: auto;
+    min-height: 100px;
+    margin: 10px auto;
+    box-shadow: 5px 5px 5px 5px #dadada;
+    color: #ffffff;
+}
+.mortgage_name{
+    text-align: left;
+    background-color: #484848;
+    color: #ffffff;
+    border-bottom: solid 1px #dadada;
+    font-size: 20px;
+}
+.mortgage_ele {
+    color: #dadada;
+}
+.mortgage_panel_ele {
+    padding: 10px;
+}
+nav {
     background-color: #484848;
     width: 100%;
     height: 70px;
     position: fixed;
-    top: 0px;    
+    top: 0px;
     left: 0px;
-    z-index:999;
+    z-index: 999;
 }
 .nav_account_ele {
     float: left;
@@ -102,14 +167,24 @@ nav{
     height:auto;
     margin: 10px;
 }
+.nav_account_ele:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 
+nav_account_label{
+    margin-left: 40px;
+}
+.nav_account_selected{
+    font-weight:bold;
+}
 .nav_logo {
     color: #ffffff;
     font-size: 30px;
-    height: 20px !important;
+    height: inherit;
     width: auto;
     padding: 15px 10px;
-    margin : 0px 10px;
+    margin: 0px 10px;
     text-decoration: none;
     float: left;
 }
@@ -132,6 +207,41 @@ nav{
 
 }
 
+
+.payment_account {
+    cursor: pointer;
+    background-color: #dadada;
+    height: auto;
+    min-height: 100px;
+    margin: 10px auto;
+    box-shadow: 5px 5px 5px 5px #a9a9a9;
+    color: #000000;
+}
+.payment_ele{
+    color: #000000;
+}
+
+.profile {
+    background-color: #ffffff;
+    height: auto;
+    min-height: 500px;
+    margin: 10px auto;
+    color: #484848;
+}
+.profile_btn {
+    margin: 10px;
+}
+#shadow {
+    cursor: pointer;
+    position:fixed;
+    top: 0px;
+    left: 0px;
+    z-index:998;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    background-color: #000000;
+}
 .selected {
     background-color: #ffffff;
     color: #484848;
@@ -192,15 +302,21 @@ nav{
     cursor: pointer;
     align-self: center;
 }
-
+#slideShow {
+    height: 400px;
+    background-color: #FFFFFF;
+    margin-top: 10px;
+    overflow: hidden;
+    padding:0px;
+}
 .slideShow {
     background-attachment: fixed;
+    height: auto;
 }
 
 .slide {
     height: 400px;
     width: 100%;
-    background-color: red;
     position: relative;
 }
 

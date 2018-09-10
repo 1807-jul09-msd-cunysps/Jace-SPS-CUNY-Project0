@@ -76,10 +76,19 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="PageScripts\account.js" />
+    <Content Include="PageScripts\jquery.js" />
+    <Content Include="PageScripts\slideshow.js" />
     <Content Include="Pages\Account.html" />
     <Content Include="Pages\Apply.html" />
     <Content Include="Pages\Home.html" />
     <Content Include="Pages\SignIn.html" />
+    <Content Include="Pics\next.png" />
+    <Content Include="Pics\prev.png" />
+    <Content Include="Pics\slideshow1.png" />
+    <Content Include="Pics\slideshow2.png" />
+    <Content Include="Pics\slideshow3.png" />
+    <Content Include="Pics\slideshow4.png" />
+    <Content Include="Pics\xicon.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -146,9 +155,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pics\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
