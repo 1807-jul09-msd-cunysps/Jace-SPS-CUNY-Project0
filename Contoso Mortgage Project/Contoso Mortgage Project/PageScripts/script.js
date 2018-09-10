@@ -61,7 +61,7 @@ function loadPayments() {
     xmlHttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             paymentList = JSON.parse(this.responseText);
-            setSession()
+            setSession();
         } else {
             paymentList = false;
         }
@@ -84,7 +84,7 @@ function homePageHandler(value) {
 
 function accountPageHandler() {
     //var result = typeof contactObj;
-    if (typeof contactObj === false) {
+    if (typeof contactObj === undefined) {
         document.getElementById("error").classList.remove("hidden");
         document.getElementById("error").innerHTML = "An Error has Occured Loading. Please Refresh the Page or Sign In again.";
     } else {
@@ -103,7 +103,7 @@ function accountPageHandler() {
             document.getElementById(accountPage).classList.add("nav_account_selected");
         }
         if (accountPage === "mortgage" || accountPage === false) {
-            for (var i = 0; i < mortgageList.length; i++) {
+            for (let i = 0; i < mortgageList.length; i++) {
                 let element = document.createElement("DIV");
                 element.classList.add("mortgage_account");
                 element.classList.add("col-md-10");
@@ -314,7 +314,7 @@ function accountPageHandler() {
 
             container.appendChild(element);
         } else if (accountPage === "payment") {
-            for (var i = 0; i < paymentList.length; i++) {
+            for (let i = 0; i < paymentList.length; i++) {
                 let element = document.createElement("DIV");
                 element.classList.add("payment_account");
                 element.classList.add("col-md-10");
@@ -347,7 +347,7 @@ function accountPageHandler() {
 
                 const numberWithCommas = (x) => {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                }
+                };
                 let balance = numberWithCommas(paymentList[i].revfinal_payment.Value);
                 let totalAmount = "Balance: " + balance;
 
@@ -380,7 +380,7 @@ function accountPageHandler() {
                 //        list.push(paymentList[i]);
                 //    }
                 //}
-                element.onclick = showPayment.bind(this);
+                element.onclick = showPayment.bind(this, name, status, balance, duedate, i);
                 container.appendChild(element);
             }
         }
@@ -400,7 +400,8 @@ function setSession() {
     };
     document.cookie = "user=" + JSON.stringify(sesObj) + ";" + "path=/";
 
-    window.location.replace("/Pages/Account.html");
+    //window.location.replace("/Pages/Account.html");
+    document.location.reload(true);
 }
 
 function setAccountPage(value) {
@@ -728,35 +729,63 @@ function showMortgage(value, i, term, balance) {
         document.getElementById("loanTarget").innerHTML = balance;
         document.getElementById("balanceTarget").innerHTML = "N/A";
         document.getElementById("arpTarget").innerHTML = "N/A";
-        let shadow = document.getElementById("shadow");
+        let shadow = document.getElementById("accountShadow");
         shadow.classList.remove("no_display");
         let panel = document.getElementById("accountPanel");
         panel.classList.remove("no_display");
     } else {
-        let shadow = document.getElementById("shadow");
+        let shadow = document.getElementById("accountShadow");
         shadow.classList.add("no_display");
         let panel = document.getElementById("accountPanel");
         panel.classList.add("no_display");
     }
 }
+//element.onclick = showPayment.bind(this, name, status, balance, duedate);
 
-function showPayment(value, i, term, balance) {
-    if (value) {
+function showPayment(name, status, balance, duedate, i) {
+    if (name) {
+        document.getElementById("paymentName").innerHTML = name;
+        document.getElementById("paymentMortgageNumberTarget").innerHTML = paymentList[i].revfinal_mortgagenumber.Value;
+        document.getElementById("paymentStatusTarget").innerHTML = status;
+        document.getElementById("paymentDuedateTarget").innerHTML = duedate;
+        document.getElementById("paymentBalanceTarget").innerHTML = balance;
+        document.getElementById("paySubmit").onclick = paymentSubmit.bind(this, i);
 
-        document.getElementById("mortgageName").innerHTML = mortgageList[i].revfinal_name;
-        document.getElementById("accountNumberTarget").innerHTML = mortgageList[i].revfinal_mortgagenumber;
-        document.getElementById("termTarget").innerHTML = term;
-        document.getElementById("loanTarget").innerHTML = balance;
-        document.getElementById("balanceTarget").innerHTML = "N/A";
-        document.getElementById("arpTarget").innerHTML = "N/A";
-        let shadow = document.getElementById("shadow");
+        let shadow = document.getElementById("paymentShadow");
         shadow.classList.remove("no_display");
-        let panel = document.getElementById("accountPanel");
-        panel.classList.remove("no_display");
+        let paymentPanel = document.getElementById("paymentPanel");
+        paymentPanel.classList.remove("no_display");
     } else {
-        let shadow = document.getElementById("shadow");
+        document.getElementById("paymentLoading").classList.add("no_display");
+        document.getElementById("paymentSuccess").classList.add("no_display");
+        let shadow = document.getElementById("paymentShadow");
         shadow.classList.add("no_display");
-        let panel = document.getElementById("accountPanel");
-        panel.classList.add("no_display");
+        let paymentPanel = document.getElementById("paymentPanel");
+        paymentPanel.classList.add("no_display");
     }
+}
+
+function paymentSubmit(i) {
+    //let imgLoading = document.createElement("img");
+    //imgLoading.classList.add("loading");
+    //imgLoading.id = "loading";
+    //imgLoading.src = "..\Pics\loading.gif";
+    //imgLoading.alt = "loaidng";
+    //document.getElementById("paymentFeedback").innerHTML = imgLoading;
+    document.getElementById("paymentLoading").classList.remove("no_display");
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            //let reqResult = this.responseText;
+            document.getElementById("paymentLoading").classList.add("no_display");
+            document.getElementById("paymentSuccess").classList.remove("no_display");
+            loadPayments();
+
+        } else if (this.readyState === 4 && this.status === 400) {
+            document.getElementById("error").innerHTML = "Payment Failed.";
+        }
+    };
+    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/pay/" + paymentList[i].id, true);
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.send();
 }

@@ -303,7 +303,7 @@ function handleFileInput(element) {
 
         let names = "";
         let fileLabel = document.createElement("span");
-        fileLabel.id = element.files[0].name
+        fileLabel.id = element.files[0].name;
         fileLabel.classList.add("file_label");
         fileLabel.classList.add("label");
         fileLabel.classList.add("label-default");

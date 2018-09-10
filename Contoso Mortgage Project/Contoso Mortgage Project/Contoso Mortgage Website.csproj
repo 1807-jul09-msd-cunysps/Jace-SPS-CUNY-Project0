@@ -82,12 +82,14 @@
     <Content Include="Pages\Apply.html" />
     <Content Include="Pages\Home.html" />
     <Content Include="Pages\SignIn.html" />
+    <Content Include="Pics\loading.gif" />
     <Content Include="Pics\next.png" />
     <Content Include="Pics\prev.png" />
     <Content Include="Pics\slideshow1.png" />
     <Content Include="Pics\slideshow2.png" />
     <Content Include="Pics\slideshow3.png" />
     <Content Include="Pics\slideshow4.png" />
+    <Content Include="Pics\success.png" />
     <Content Include="Pics\xicon.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

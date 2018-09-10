@@ -11,7 +11,7 @@
 
 #accountPanel {
     position: fixed;
-    z-index: 998;
+    z-index: 997;
     top: 0;
     left: 0;
     width: 50%;
@@ -46,6 +46,18 @@ body {
 }
 #description {
 
+}
+#error 
+{
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: auto;
+    min-height: 70%;
+    margin: 8% 25%;
+    background-color: #ffffff;
 }
 form {
     min-width: 250px;
@@ -221,6 +233,17 @@ nav_account_label{
     color: #000000;
 }
 
+#paymentPanel {
+    position: fixed;
+    z-index: 997;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: auto;
+    min-height: 70%;
+    margin: 8% 25%;
+    background-color: #a9a9a9;
+}
 .profile {
     background-color: #ffffff;
     height: auto;
@@ -231,12 +254,12 @@ nav_account_label{
 .profile_btn {
     margin: 10px;
 }
-#shadow {
+.shadow {
     cursor: pointer;
     position:fixed;
     top: 0px;
     left: 0px;
-    z-index:998;
+    z-index:996;
     width: 100%;
     height: 100%;
     opacity: 0.8;

@@ -32,7 +32,7 @@
     <div id="accountContainer" class="col-md-10 mb-4"></div>
 
     <div id="error" class="no_display"></div>
-    <div id="shadow" class="no_display" onclick="showMortgage(false)"></div>
+    <div id="accountShadow" class="shadow no_display" onclick="showMortgage(false)"></div>
 
     <div id="accountPanel" class="no_display">
         <div class="flex-row mortgage_name mortgage_panel_ele">
@@ -67,36 +67,39 @@
         </div>
     </div>
 
+    <div id="paymentShadow" class="shadow no_display" onclick="showPayment(false)"></div>
+
     <div id="paymentPanel" class="no_display">
         <div class="flex-row mortgage_name mortgage_panel_ele">
-            <label class="col-md-11" id="mortgageName">House Mortgage</label>
-            <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showMortgage(false)" />
+            <label class="col-md-11" id="paymentName">House Mortgage</label>
+            <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showPayment(false)" />
         </div>
 
         <div class="row account_row">
-            <div id="accountNumber" class="col-md-4">Account Number:</div>
-            <div id="accountNumberTarget" class="col-md-8">N/A</div>
+            <div id="paymentMortgageNumber" class="col-md-4">Mortgage Number:</div>
+            <div id="paymentMortgageNumberTarget" class="col-md-8">N/A</div>
         </div>
         <div class="row account_row">
-            <div id="term" class="col-md-4">Term:</div>
-            <div id="termTarget" class="col-md-8">N/A</div>
+            <div id="paymentStatus" class="col-md-4">Status:</div>
+            <div id="paymentStatusTarget" class="col-md-8">N/A</div>
         </div>
         <div class="row account_row">
-            <div id="loan" class="col-md-4">Loan Amount: </div>
-            <div id="loanTarget" class="col-md-8">N/A</div>
+            <div id="paymentDuedate" class="col-md-4">Due Date: </div>
+            <div id="paymentDuedateTarget" class="col-md-8">N/A</div>
         </div>
         <div class="row account_row">
-            <div id="balance" class="col-md-4">Remaining Balance: </div>
-            <div id="balanceTarget" class="col-md-8">N/A</div>
+            <div id="paymentBalance" class="col-md-4">Balance: </div>
+            <div id="paymentBalanceTarget" class="col-md-8">N/A</div>
         </div>
-        <div class="row account_row">
-            <div id="arp" class="col-md-4">Annual Percentage Rate: </div>
-            <div id="arpTarget" class="col-md-8">N/A</div>
-        </div>
+
         <div class="flex-row-reverse btn_row">
-            <button class="btn col-md-3">View Payments</button>
-            <button class="btn col-md-3">Make A Payment</button>
-            <button class="btn col-md-3">Report An Issue</button>
+            <button id="paySubmit" class="btn col-md-3">Pay</button>
+            <button class="btn col-md-3">Set Up Payment</button>
+            <div class="btn col-md-3"></div>
+            <div id="paymentFeedback" class="btn col-md-3">
+                <img id="paymentSuccess" scr="../Pics/success.png" alt="success" class="no_display" />
+                <img id="paymentLoading" scr="../Pics/loading.gif" alt="loading" class="no_display" />
+            </div>
         </div>
     </div>
 
