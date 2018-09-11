@@ -45,6 +45,7 @@ body {
     background-color: #ffffff;
 }
 
+
 #casePanel {
     position: fixed;
     z-index: 997;
@@ -151,6 +152,18 @@ footer {
     margin-left: 100%;
     visibility: hidden;
     opacity: 0;
+}
+#issuePanel {
+    position: fixed;
+    z-index: 997;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: auto;
+    min-height: 70%;
+    margin: 8% 25%;
+    background-color: #ffffff;
+    padding: 0px;
 }
 .mortgage_account {
     cursor: pointer;

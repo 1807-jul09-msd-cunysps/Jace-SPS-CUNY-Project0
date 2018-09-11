@@ -36,7 +36,7 @@
     <div id="error" class="no_display"></div>
     <div id="accountShadow" class="shadow no_display" onclick="showMortgage(false)"></div>
 
-    <div id="" class="no_display">
+    <div id="accountPanel" class="no_display">
         <div class="flex-row mortgage_name mortgage_panel_ele">
             <label class="col-md-11" id="mortgageName">House Mortgage</label>
             <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showMortgage(false)" />
@@ -58,14 +58,12 @@
             <div id="balance" class="col-md-4">Remaining Balance: </div>
             <div id="balanceTarget" class="col-md-8">N/A</div>
         </div>
-        <div class="row account_row">
-            <div id="arp" class="col-md-4">Annual Percentage Rate: </div>
-            <div id="arpTarget" class="col-md-8">N/A</div>
-        </div>
         <div class="flex-row-reverse btn_row">
-            <button class="btn col-md-3">View Payments</button>
-            <button class="btn col-md-3">Make A Payment</button>
-            <button class="btn col-md-3" onclick="showIssueList(true, document.getElementById('mortgageName').innerHTML)">Report An Issue</button>
+            <button 
+                class="btn col-md-3" 
+                onclick="showIssue(true, document.getElementById('mortgageName').innerHTML, document.getElementById('accountNumberTarget').innerHTML)">
+                Report An Issue
+            </button>
         </div>
     </div>
 
@@ -99,38 +97,54 @@
             <button class="btn col-md-3">Set Up Payment</button>
             <div class="btn col-md-3"></div>
             <div id="paymentFeedback" class="btn col-md-3">
-                <img id="paymentSuccess" scr="../Pics/success.png" alt="success" class="no_display" />
-                <img id="paymentLoading" scr="../Pics/loading.gif" alt="loading" class="no_display" />
+                <img id="paymentSuccess" src="../Pics/success.png" alt="success" class="no_display" />
+                <img id="paymentLoading" src="../Pics/loading.gif" alt="loading" class="no_display" />
             </div>
         </div>
     </div>
 
-    <div id="reportShadow" class="shadow no_display" onclick="showIssue(false)"></div>
+    <div id="issueShadow" class="shadow no_display" onclick="showIssue(false)"></div>
 
-    <div id="reportPanel" class="">
+    <form onsubmit="return false;" action="" id="issuePanel" class="no_display">
         <div class="flex-row mortgage_name mortgage_panel_ele">
-            <label class="col-md-11" id="reportTitle"></label>
-            <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showCase(false)" />
+            <label class="col-md-11" style="padding-right: 0px;" id="issueTitle"></label>
+            <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showIssue(false)" />
         </div>
+        
+        <div class="row account_row">
+            <div id="issueSubject" class="col-md-4">Mortgage Number:</div>
+            <label class="col-md-8" style="padding:0px;" id="issueMortgageNumber"></label>
+        </div>
+        <div class="row account_row">
+            <div id="issueSubject" class="col-md-4">Subject:</div>
+            <select id="issueSubjectTarget" class="form-control col-md-8">
+                <option value="Billing" selected>Billing</option>
+                <option value="Flooding">Flooding</option>
+                <option value="WaterWay">Water Way</option>
+                <option value="Enviornmental Management">Enviornmental Management</option>
+                <option value="Other">Other</option>
+            </select>
 
-        <div class="row account_row">
-            <div id="caseTicketNumber" class="col-md-4">Case Ticket Number:</div>
-            <div id="caseTicketNumberTarget" class="col-md-8">N/A</div>
         </div>
-        <div class="row account_row">
-            <div id="caseDescription" class="col-md-4">Description:</div>
-            <div id="caseDescriptionTarget" class="col-md-8">N/A</div>
+        <div class="row account_row" style="height: auto;">
+            <div id="issueDescription" class="col-md-4">Description:</div>
+            <textarea id="issueDescriptionTarget" class="form-control col-md-8" rows="6"></textarea>
         </div>
-        <div class="row account_row">
-            <div id="caseStatusCode" class="col-md-4">Status: </div>
-            <div id="caseStatusCodeTarget" class="col-md-8">N/A</div>
+        <div class="flex-row-reverse btn_row">
+            <button id="back" class="btn col-md-3" onclick="showIssue('back')">Back</button>
+            <button class="btn col-md-3" onclick="issueSubmit()">Submit Case</button>
+            <div class="btn col-md-3"></div>
+            <div id="paymentFeedback" class="btn col-md-3">
+                <img id="paymentSuccess" src="../Pics/success.png" alt="success" class="no_display" />
+                <img id="paymentLoading" src="../Pics/loading.gif" alt="loading" class="no_display" />
+            </div>
         </div>
-    </div>
+    </form>
 
 
     <div id="caseShadow" class="shadow no_display" onclick="showIssue(false)"></div>
 
-    <div id="casePanel" class="">
+    <div id="casePanel" class="no_display">
         <div class="flex-row mortgage_name mortgage_panel_ele">
             <label class="col-md-11" id="caseTitle"></label>
             <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showCase(false)" />
@@ -140,7 +154,7 @@
             <div id="caseTicketNumber" class="col-md-4">Case Ticket Number:</div>
             <div id="caseTicketNumberTarget" class="col-md-8">N/A</div>
         </div>
-        <div class="row account_row">
+        <div class="row account_row" style="height:auto;padding-bottom: 15px;">
             <div id="caseDescription" class="col-md-4">Description:</div>
             <div id="caseDescriptionTarget" class="col-md-8">N/A</div>
         </div>
