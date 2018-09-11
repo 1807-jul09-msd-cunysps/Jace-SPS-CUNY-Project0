@@ -280,9 +280,6 @@ function accountPageHandler() {
             row5.appendChild(postalLabel);
             row5.appendChild(postalValue);
 
-
-
-
             let row6 = document.createElement("div");
             row6.classList.add("flex-row-reverse");
             row6.classList.add("btn_row");
@@ -383,7 +380,91 @@ function accountPageHandler() {
                 element.onclick = showPayment.bind(this, name, status, balance, duedate, i);
                 container.appendChild(element);
             }
+        } else if (accountPage === "case") {
+            let loadingImg = document.createElement("img");
+            loadingImg.src = "../Pics/loading.gif";
+            loadingImg.alt = "loaing";
+            loadingImg.classList.add("loading");
+            container.appendChild(loadingImg);
+
+
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let caseList = JSON.parse(this.responseText);
+                    //let container = document.getElementById("issueListTarget");
+
+                    //container.id = "issueListContainer";
+                    container.removeChild(loadingImg);
+                    for (var i = 0; i < caseList.length; i++) {
+                        let element = document.createElement("DIV");
+                        element.classList.add("mortgage_account");
+                        element.classList.add("col-md-10");
+                        element.classList.add("mb-4");
+
+
+                        let caseTitleHeader = document.createElement("h3");
+
+                        caseTitleHeader.innerHTML = caseList[i].title;
+                        caseTitleHeader.classList.add("mortgage_name");
+
+                        let ticketNumber = document.createElement("label");
+                        ticketNumber.innerHTML = "Ticket Number: " + caseList[i].ticketnumber;
+                        ticketNumber.classList.add("col-md-4");
+                        ticketNumber.classList.add("mb-4");
+                        ticketNumber.classList.add("mortgage_ele");
+
+
+                        let descriptionSub = caseList[i].description.substring(0, 10) + "...";
+                        let descriptionFull = caseList[i].description;
+                        let description = document.createElement("label");
+                        description.innerHTML = "Description: " + descriptionSub;
+                        description.classList.add("col-md-4");
+                        description.classList.add("mb-4");
+                        description.classList.add("mortgage_ele");
+
+
+                        let statusCode = document.createElement("label");
+                        let status = caseList[i].statuscode.Value;
+                        switch (status) {
+                            case 1:
+                                status = "In Progress";
+                                break;
+                            case 2:
+                                status = "On Hold";
+                                break;
+                            case 3:
+                                status = "Waiting for Detials";
+                                break;
+                            case 4:
+                                status = "Researching";
+                                break;
+                            default:
+                        }
+                        statusCode.innerHTML = "Status Code: " + status;
+                        statusCode.classList.add("col-md-4");
+                        statusCode.classList.add("mb-4");
+                        statusCode.classList.add("mortgage_ele");
+
+                        element.appendChild(caseTitleHeader);
+                        element.appendChild(ticketNumber);
+                        element.appendChild(description);
+                        element.appendChild(statusCode);
+
+                        element.onclick = showCase.bind(this, true, caseList[i].title, caseList[i].ticketnumber, descriptionFull, status);
+
+                        container.appendChild(element);
+                    }
+                    //document.getElementById("loadingPanel").classList.add("no_display");
+                } else if (this.readyState === 4 && this.status === 400) {
+                    document.getElementById("error").innerHTML = "Case Request Failed.";
+                }
+            };
+            xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/case/" + contactID, true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.send();
         }
+
     }
 
 }
@@ -400,8 +481,8 @@ function setSession() {
     };
     document.cookie = "user=" + JSON.stringify(sesObj) + ";" + "path=/";
 
-    //window.location.replace("/Pages/Account.html");
-    document.location.reload(true);
+    window.location.replace("/Pages/Account.html");
+    //document.location.reload(true);
 }
 
 function setAccountPage(value) {
@@ -788,4 +869,86 @@ function paymentSubmit(i) {
     xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/pay/" + paymentList[i].id, true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.send();
+}
+
+
+function showCase(value, title, ticketNumber, description, statuscode) {
+    if (value) {
+        document.getElementById("caseShadow").classList.remove("no_display");
+        document.getElementById("casePanel").classList.remove("no_display");
+
+        document.getElementById("caseTitle").innerHTML = title;
+        document.getElementById("caseTicketNumberTarget").innerHTML = ticketNumber;
+        document.getElementById("caseDescriptionTarget").innerHTML = description;
+        document.getElementById("caseStatusCodeTarget").innerHTML = statuscode;
+    } else {
+        document.getElementById("caseShadow").classList.add("no_display");
+        document.getElementById("casePanel").classList.add("no_display");
+    }
+}
+function showIssueList(value) {
+    //document.getElementById("accountPanel").classList.add("no_display");
+    document.getElementById("accountShadow").classList.add("no_display");
+
+    document.getElementById("issueListPanel").classList.remove("no_display");
+    document.getElementById("issueListShadow").classList.remove("no_display");
+    
+    if (value) {
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let caseList = JSON.parse(this.responseText);
+                let container = document.getElementById("issueListTarget");
+
+                container.id = "issueListContainer";
+                for (var i = 0; i < caseList.length; i++) {
+                    let element = document.createElement("DIV");
+                    element.classList.add("mortgage_account");
+                    element.classList.add("col-md-10");
+                    element.classList.add("mb-4");
+
+                    
+                    let caseTitleHeader = document.createElement("h3");
+                    
+                    caseTitleHeader.innerHTML = caseList[i].title;
+                    caseTitleHeader.classList.add("mortgage_name");
+                    caseTitleHeader.innerHTML = mortgage;
+                    
+                    let ticketNumber = document.createElement("label");
+                    ticketNumber.innerHTML = "Ticket Number: " + caseList[i].ticketNumber;
+                    ticketNumber.classList.add("col-md-4");
+                    ticketNumber.classList.add("mb-4");
+                    ticketNumber.classList.add("mortgage_ele");
+
+                    let description = document.createElement("label");
+                    description.innerHTML = "Description: " + caseList[i].description;
+                    description.classList.add("col-md-4");
+                    description.classList.add("mb-4");
+                    description.classList.add("mortgage_ele");
+
+
+                    let statusCode = document.createElement("label");
+                    statusCode.innerHTML = "Status Code: " + caseList[i].statuscode;
+                    statusCode.classList.add("col-md-4");
+                    statusCode.classList.add("mb-4");
+                    statusCode.classList.add("mortgage_ele");
+
+                    element.appendChild(caseTitleHeader);
+                    element.appendChild(ticketNumber);
+                    element.appendChild(description);
+                    element.appendChild(statusCode);
+                    
+                    container.appendChild(element);
+                }
+                document.getElementById("loadingPanel").classList.add("no_display");
+            } else if (this.readyState === 4 && this.status === 400) {
+                document.getElementById("error").innerHTML = "Case Request Failed.";
+            }
+        };
+        xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/case/" + contactID, true);
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.send();
+    } else {
+
+    }
 }

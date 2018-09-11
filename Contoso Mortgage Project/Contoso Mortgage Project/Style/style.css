@@ -44,9 +44,19 @@ body {
     height: auto;
     background-color: #ffffff;
 }
-#description {
 
+#casePanel {
+    position: fixed;
+    z-index: 997;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: auto;
+    min-height: 70%;
+    margin: 8% 25%;
+    background-color: #a9a9a9;
 }
+
 #error 
 {
     position: fixed;

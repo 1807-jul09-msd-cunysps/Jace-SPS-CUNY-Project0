@@ -23,7 +23,7 @@ var formFields = {
     Option: true
 };
 //variables to store returned ContactGUID and Mortgage Account Number
-var contactID, mortgageResult, files = [], files64 = [];
+var contactID, mortgageResult, files = [], files64 = [], filesUploaded = 0;
 
 //Validation====================================================
 function validatePasswordLength(string) {
@@ -132,7 +132,7 @@ function validateSSN(element) {
     } else {
         element.classList.add("is-invalid");
         text = (element.value.length !== 0) ?
-            "Please input your 9 digit SSN, '-' are optional." :
+            "Please input your 9 digit, '-' are optional." :
             "This field is required.";
         results = false;
     }
@@ -150,7 +150,7 @@ function validatePhone(element) {
     } else {
         element.classList.add("is-invalid");
         text = (element.value.length !== 0) ?
-            "Please input your phone number digit SSN '()' and '-' are optional." :
+            "Please input your phone number digit '()' and '-' are optional." :
             "This field is required.";
         results = false;
     }
@@ -237,8 +237,8 @@ function formMortgageSubmit() {
     if (clearedValidation) {
         //Ajax call
         document.getElementById("SubmitValidate").innerHTML = "";
-        //let mortgageObj = { ContactID: contactID };
-        let mortgageObj = { ContactID: "ddb4b385-3fb1-e811-a96b-000d3a1ca939" };
+        let mortgageObj = { ContactID: contactID };
+        //let mortgageObj = { ContactID: "ddb4b385-3fb1-e811-a96b-000d3a1ca939" };
         for (let i = 0; i < fields.length; i++) {
             switch (fields[i]) {
                 case "MortgageAmount":
@@ -260,15 +260,18 @@ function formMortgageSubmit() {
                 mortgageResult = this.responseText;
                 for (var i = 0; i < files.length; i++) {
                     let fileObj = {
-                        "ContactID": "ddb4b385-3fb1-e811-a96b-000d3a1ca939",
-                        //"ContactID": contactID,
+                        //"ContactID": "ddb4b385-3fb1-e811-a96b-000d3a1ca939",
+                        "ContactID": contactID,
                         "Base64Data": files[i].file64,
-                        "Type": files[i].file.type,
+                        //"Type": files[i].file.type,
                         "FileName": files[i].file.name
-                    }
+                    };
                     uploadFiles(fileObj);
                 }
-                //window.location.replace("/Pages/SignIn.html");
+                if (files.length === 0) {
+                    window.location.replace("/Pages/Account.html");
+                }
+                
             }
         };
     } else {
@@ -283,9 +286,15 @@ function uploadFiles(fileObj) {
     xmlHttp.send(JSON.stringify(fileObj));
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            let results = this.responseText;
+            checkUploadComplete();
         }
     };
+}
+function checkUploadComplete() {
+    filesUploaded += 1;
+    if (filesUploaded >= files.length) {
+        window.location.replace("/Pages/Account.html");
+    }
 }
 
 function handleFileInput(element) {
@@ -301,7 +310,7 @@ function handleFileInput(element) {
         fileObj["file64"] = result;
         files.push(fileObj);
 
-        let names = "";
+        //let names = "";
         let fileLabel = document.createElement("span");
         fileLabel.id = element.files[0].name;
         fileLabel.classList.add("file_label");
@@ -312,9 +321,9 @@ function handleFileInput(element) {
         document.getElementById("files").appendChild(fileLabel);
     };
     reader.onerror = function () {
-        document.getElementById("filesValidate").innerHTML = "Error Uplode: " + element.files[0].name; 
+        document.getElementById("filesValidate").innerHTML = "Error Uplode: " + element.files[0].name;
         console.log('Error:', error);
-    }
+    };
 }
 function removeFile(file) {
     for (var i = 0; i < files.length; i++) {

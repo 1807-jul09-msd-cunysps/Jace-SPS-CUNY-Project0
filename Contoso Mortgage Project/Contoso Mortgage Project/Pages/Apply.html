@@ -81,8 +81,13 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label>Country:</label>
-                <input id="Country" class="form-control" type="text" onblur="validateChars(this)"/>
-                <div id="CountryValidate" class="validation"></div>
+                <select id="Country" class="form-control">
+                    <option value="US" selected>United States</option>
+                    <option value="Canada">Canada</option>
+                </select>
+
+                <!--<input id="Country" class="form-control" type="text" onblur="validateChars(this)" />
+    <div id="CountryValidate" class="validation"></div>-->
             </div>
             <div class="col-md-6">
                 <label>Zip Code:</label>
@@ -97,7 +102,7 @@
     </form>
 
     <form id="formMortgage" style="z-index:2;" class="hiddenForm form_apply" onsubmit="return false;" action="">
-        <h2>Loan Detials</h2>
+        <h2>Loan Details</h2>
         <div class="form-row">
             <div class="col-md-6">
                 <label>Mortgage Name</label>

@@ -24,6 +24,8 @@
                 <li id="mortgage" class="nav_account_ele" onclick="setAccountPage('mortgage')">Mortgages</li>
                 <li id="profile" class="nav_account_ele" onclick="setAccountPage('profile')">My Profile</li>
                 <li id="payment" class="nav_account_ele" onclick="setAccountPage('payment')">Billing</li>
+                <li id="case" class="nav_account_ele" onclick="setAccountPage('case')">Cases</li>
+
                 <li class="nav_account_ele" onclick="signOut()">Sign Out</li>
             </ul>
         </div>
@@ -34,7 +36,7 @@
     <div id="error" class="no_display"></div>
     <div id="accountShadow" class="shadow no_display" onclick="showMortgage(false)"></div>
 
-    <div id="accountPanel" class="no_display">
+    <div id="" class="no_display">
         <div class="flex-row mortgage_name mortgage_panel_ele">
             <label class="col-md-11" id="mortgageName">House Mortgage</label>
             <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showMortgage(false)" />
@@ -63,7 +65,7 @@
         <div class="flex-row-reverse btn_row">
             <button class="btn col-md-3">View Payments</button>
             <button class="btn col-md-3">Make A Payment</button>
-            <button class="btn col-md-3">Report An Issue</button>
+            <button class="btn col-md-3" onclick="showIssueList(true, document.getElementById('mortgageName').innerHTML)">Report An Issue</button>
         </div>
     </div>
 
@@ -103,7 +105,50 @@
         </div>
     </div>
 
+    <div id="reportShadow" class="shadow no_display" onclick="showIssue(false)"></div>
 
+    <div id="reportPanel" class="">
+        <div class="flex-row mortgage_name mortgage_panel_ele">
+            <label class="col-md-11" id="reportTitle"></label>
+            <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showCase(false)" />
+        </div>
+
+        <div class="row account_row">
+            <div id="caseTicketNumber" class="col-md-4">Case Ticket Number:</div>
+            <div id="caseTicketNumberTarget" class="col-md-8">N/A</div>
+        </div>
+        <div class="row account_row">
+            <div id="caseDescription" class="col-md-4">Description:</div>
+            <div id="caseDescriptionTarget" class="col-md-8">N/A</div>
+        </div>
+        <div class="row account_row">
+            <div id="caseStatusCode" class="col-md-4">Status: </div>
+            <div id="caseStatusCodeTarget" class="col-md-8">N/A</div>
+        </div>
+    </div>
+
+
+    <div id="caseShadow" class="shadow no_display" onclick="showIssue(false)"></div>
+
+    <div id="casePanel" class="">
+        <div class="flex-row mortgage_name mortgage_panel_ele">
+            <label class="col-md-11" id="caseTitle"></label>
+            <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showCase(false)" />
+        </div>
+
+        <div class="row account_row">
+            <div id="caseTicketNumber" class="col-md-4">Case Ticket Number:</div>
+            <div id="caseTicketNumberTarget" class="col-md-8">N/A</div>
+        </div>
+        <div class="row account_row">
+            <div id="caseDescription" class="col-md-4">Description:</div>
+            <div id="caseDescriptionTarget" class="col-md-8">N/A</div>
+        </div>
+        <div class="row account_row">
+            <div id="caseStatusCode" class="col-md-4">Status: </div>
+            <div id="caseStatusCodeTarget" class="col-md-8">N/A</div>
+        </div>
+    </div>
 
     <footer class="col-md-12 mb-4 container">
         <div class="row" style="text-align:center;">
