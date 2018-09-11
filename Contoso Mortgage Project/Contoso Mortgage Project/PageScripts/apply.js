@@ -23,7 +23,51 @@ var formFields = {
     Option: true
 };
 //variables to store returned ContactGUID and Mortgage Account Number
-var contactID, mortgageResult, files = [], files64 = [], filesUploaded = 0;
+var contactID, mortgageResult, applyPage, files = [], files64 = [], filesUploaded = 0;
+
+
+
+function applyCheckSession() {
+    let value = applyGetSession("user");
+    if (value !== false) {
+        applyPage = "mortgage";
+        contactID = value.id;
+    } else {
+        applyPage = "apply";
+    }
+    applyPageHandler();
+}
+
+function applyGetSession(cName) {
+    cName = cName + "=";
+    let cookieList = document.cookie.split(";");
+    for (var i = 0; i < cookieList.length; i++) {
+        let cookie = cookieList[i];
+        cookie = cookie.trim();
+        if (cookie === "") { continue; }
+        while (cookie.charAt(0) === "") {
+            cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(cName) === 0) {
+            let result = cookie.substring(cName.length, cookie.length);
+            return result;
+        }
+    }
+    return false;
+}
+function applyPageHandler() {
+    if (applyPage !== "apply") {
+        document.getElementById("formMortgage").classList.remove("hiddenForm");
+        document.getElementById("formContact").classList.add("fadeOutNext");
+
+        document.getElementById("sign_in").classList.add("no_display");
+        document.getElementById("account").classList.remove("no_display");
+    } else {
+        document.getElementById("sign_in").classList.remove("no_display");
+        document.getElementById("account").classList.add("no_display");
+    }
+}
+
 
 //Validation====================================================
 function validatePasswordLength(string) {

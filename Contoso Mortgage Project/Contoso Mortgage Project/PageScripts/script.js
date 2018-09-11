@@ -26,7 +26,7 @@ var passwordValidation = {
 //on Page load call checkSessionLoad()
 //window.onload = checkSessionLoad;
 
-function loadContactObj(username) {
+function loadContactObj() {
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -542,14 +542,20 @@ function checkSession(currentPage) {
             case "account":
                 accountPageHandler();
                 break;
+            case "signin":
+                window.location.replace("/Pages/Account.html");
+                break;
             default:
         }
     } else {
-        //window.location.replace("/Pages/SignIn.html");
+        switch (currentPage) {
+            case "account":
+                window.location.replace("/Pages/SignIn.html");
+                break;
+            default:
+        }
     }
 }
-
-
 //Sign In Functionality=========================================================
 
 function selectformSignIn(value) {

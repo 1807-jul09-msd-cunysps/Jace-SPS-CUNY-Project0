@@ -55,7 +55,8 @@ body {
     height: auto;
     min-height: 70%;
     margin: 8% 25%;
-    background-color: #a9a9a9;
+    background-color: #484848;
+    color: #ffffff;
 }
 
 #error 
@@ -277,6 +278,13 @@ nav_account_label{
 .profile_btn {
     margin: 10px;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
 .shadow {
     cursor: pointer;
     position:fixed;
@@ -377,4 +385,32 @@ nav_account_label{
 }
 .validation{
     color: red;
+}
+
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { /*safari and chrome*/
+    select {
+        height: 30px;
+        line-height: 30px;
+        background: #f4f4f4;
+    }
+}
+
+select::-moz-focus-inner { /*Remove button padding in FF*/
+    border: 0;
+    padding: 0;
+}
+
+@-moz-document url-prefix() { /* targets Firefox only */
+    select {
+        padding: 15px 0 !important;
+    }
+}
+
+@media screen\0 { /* IE Hacks: targets IE 8, 9 and 10 */
+    select {
+        height: 30px;
+        line-height: 30px;
+    }
 }

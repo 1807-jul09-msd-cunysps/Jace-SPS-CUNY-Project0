@@ -7,10 +7,11 @@
     <link rel="stylesheet" type="text/css" href="../Style/style.css" />
     <script src="../PageScripts/apply.js"></script>
 </head>
-<body>
+<body onload="applyCheckSession()">
     <nav>
         <a href="Home.html" class="nav_logo">Contoso Mortgage</a>
-        <a href="SignIn.html" class="nav_ele">Sign In</a>
+        <a id="sign_in" href="SignIn.html" class="nav_ele">Sign In</a>
+        <a id="account" href="Account.html" class="nav_ele no_display">Account</a>
         <a href="About.html" class="nav_ele">About Us</a>
         <div class="nav_ele selected">Apply for Loan</div>
         <a href="Help.html" class="nav_ele">Help</a>
@@ -74,7 +75,58 @@
             </div>
             <div class="col-md-6">
                 <label>State:</label>
-                <input id="State" class="form-control" type="text" onblur="validateChars(this)" />
+                <select id="State" class="form-control scrollable-menu" size="3">
+                    <option value="Alabama">Alabama</option>
+                    <option value="Alaska">Alaska</option>
+                    <option value="Arizona">Arizona</option>
+                    <option value="Arkansas">Arkansas</option>
+                    <option value="California">California</option>
+                    <option value="Colorado">Colorado</option>
+                    <option value="Connecticut">Connecticut</option>
+                    <option value="Delaware">Delaware</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Georiga">Georiga</option>
+                    <option value="Hawaii">Hawaii</option>
+                    <option value="Idaho">Idaho</option>
+                    <option value="Illinois">Illinois</option>
+                    <option value="Indiana">Indiana</option>
+                    <option value="Iowa">Iowa</option>
+                    <option value="Kansas">Kansas</option>
+                    <option value="Kentucky">Kentucky</option>
+                    <option value="Louisiana">Louisiana</option>
+                    <option value="Maine">Maine</option>
+                    <option value="Maryland">Maryland</option>
+                    <option value="Massachusetts">Massachusetts</option>
+                    <option value="Michigan">Michigan</option>
+                    <option value="Minnesota">Minnesota</option>
+                    <option value="Mississippi">Mississippi</option>
+                    <option value="Missouri">Missouri</option>
+                    <option value="Montana">Montana</option>
+                    <option value="Nebraska">Nebraska</option>
+                    <option value="Nevada">Nevada</option>
+                    <option value="New Hampshire">New Hampshire</option>
+                    <option value="New Jersey">New Jersey</option>
+                    <option value="New Mexico">New Mexico</option>
+                    <option value="New York" selected>New York</option>
+                    <option value="North Carolina">North Carolina</option>
+                    <option value="North Dakota">North Dakota</option>
+                    <option value="Ohio">Ohio</option>
+                    <option value="Oklahoma">Oklahoma</option>
+                    <option value="Oregon">Oregon</option>
+                    <option value="Pennsylvania">Pennsylvania</option>
+                    <option value="Rhode Island">Rhode Island</option>
+                    <option value="South Carolina">South Carolina</option>
+                    <option value="South Dakota">South Dakota</option>
+                    <option value="Tennessee">Tennessee</option>
+                    <option value="Texas">Texas</option>
+                    <option value="Utah">Utah</option>
+                    <option value="Vermont">Vermont</option>
+                    <option value="Virginia">Virginia</option>
+                    <option value="Washington">Washington</option>
+                    <option value="West Virginia">West Virginia</option>
+                    <option value="Wisconsin">Wisconsin</option>
+                    <option value="Wyoming">Wyoming</option>
+                </select>
                 <div id="StateValidate" class="validation"></div>
             </div>
         </div>
@@ -85,6 +137,7 @@
                     <option value="US" selected>United States</option>
                     <option value="Canada">Canada</option>
                 </select>
+                <div id="CountryValidate" class="validation"></div>
 
                 <!--<input id="Country" class="form-control" type="text" onblur="validateChars(this)" />
     <div id="CountryValidate" class="validation"></div>-->
@@ -106,14 +159,14 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label>Mortgage Name</label>
-                <input id="MortgageName" class="form-control" type="text" onblur="validateChars(this)" value="House Mortgage" />
+                <input id="MortgageName" class="form-control" type="text" onblur="validateChars(this)" placeholder="House Mortgage" />
                 <div id="MortgageNameValidate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6">
                 <label>Mortgage Loan Amount</label>
-                <input id="MortgageAmount" class="form-control" type="text" onblur="validateNumbers(this)" value="100000" />
+                <input id="MortgageAmount" class="form-control" type="text" onblur="validateNumbers(this)"/>
                 <div id="MortgageAmountValidate" class="validation"></div>
             </div>
             <div class="col-md-6">

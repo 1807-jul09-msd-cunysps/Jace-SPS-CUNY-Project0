@@ -76,10 +76,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="PageScripts\account.js" />
+    <Content Include="PageScripts\help.js" />
     <Content Include="PageScripts\jquery.js" />
     <Content Include="PageScripts\slideshow.js" />
     <Content Include="Pages\Account.html" />
     <Content Include="Pages\Apply.html" />
+    <Content Include="Pages\Help.html" />
     <Content Include="Pages\Home.html" />
     <Content Include="Pages\SignIn.html" />
     <Content Include="Pics\loading.gif" />
