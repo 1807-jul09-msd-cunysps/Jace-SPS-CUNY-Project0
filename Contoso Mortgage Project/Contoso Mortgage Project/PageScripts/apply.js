@@ -230,6 +230,7 @@ function formContactSubmit() {
         for (let i = 0; i < fields.length; i++) {
             contactObj[fields[i]] = formFields[fields[i]];
         }
+        contactObj["State"] = (contactObj["Country"] === "Canada") ? "" : contactObj["State"];
 
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/user", true);
@@ -394,7 +395,6 @@ function checkCanada() {
     let element = document.getElementById("Country");
     let result = (element.value === "Canada") ? true : false;
     document.getElementById("State").disabled = result;
-    document.getElementById("State").value = "N/A";
 }
 
 //function addBase64(file) {

@@ -17,6 +17,7 @@
         <a href="Help.html" class="nav_ele">Help</a>
     </nav>
 
+
     <form id="formSelect" class="animate form_sign_in" style="z-index:3" onsubmit="return false;" action="">
         <div style="text-align:center;">
             <div class="select_label" onclick="selectformSignIn(true)">
@@ -40,7 +41,7 @@
         <div class="form-row">
             <div class="col-md-12">
                 <label>User Name:</label>
-                <input id="signInUserName" class="form-control" type="text" value="Johnny"/>
+                <input id="signInUserName" class="form-control" type="text" value="Johnny" />
                 <div id="signInUserNameValidate" class="validation"></div>
             </div>
         </div>
@@ -70,36 +71,33 @@
         <div class="form-row">
             <div class="col-md-12">
                 <label>User Name:</label>
-                <input id="registerUserName" class="form-control" type="text" onblur="validateUserName(this)" value="Johnny" />
+                <input id="registerUserName" class="form-control" type="text" onblur="validateUserName(this)" />
                 <div id="registerUserNameValidate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-12">
                 <label>Password:</label>
-                <input 
-                       id="registerPassword"
-                       class="form-control" 
-                       type="password" 
+                <input id="registerPassword"
+                       class="form-control"
+                       type="password"
                        onfocus="showHelp()"
                        onkeyup="passwordFormat(this)"
-                       onblur="validatePassword(this, document.getElementById('registerPassword2'))"
-                       value="abc123!@#"
-                 />
+                       onblur="validatePassword(this, document.getElementById('registerPassword2'))" />
                 <div id="registerPasswordValidate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-12">
                 <label>Re-Enter Password:</label>
-                <input id="registerPassword2" class="form-control" type="password" onblur="validatePassword(this, document.getElementById('registerPassword'))" value="abc123!@#" />
+                <input id="registerPassword2" class="form-control" type="password" onblur="validatePassword(this, document.getElementById('registerPassword'))" value="" />
                 <div id="registerPassword2Validate" class="validation"></div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-12">
                 <label>Mortgage Account Number:</label>
-                <input id="registerMortgageNumber" class="form-control" type="text" onblur="validateMortgage(this)" value="201809050711" />
+                <input id="registerMortgageNumber" class="form-control" type="text" onblur="validateMortgage(this)" />
                 <div id="registerMortgageNumberValidate" class="validation"></div>
             </div>
         </div>
@@ -108,9 +106,11 @@
                 <input style="margin:20px;text-align:right;" class="btn btn-primary" type="submit" value="Back" onclick="selectformRegister(false)" />
                 <div id="registerSubmitValidate" style="margin:25px;" class="validation"></div>
             </div>
-            <div class="col-md-7"></div>
+            <div class="col-md-8" style="text-align:center">
+                <img id="registerLoading" src="../Pics/loading.gif" alt="loading" style="height:40px;width:40px;margin-top:20px;" class="no_display" />
+            </div>
             <div class="col-md-2">
-                <input style="margin:20px;text-align:right;" class="btn btn-primary pull-right" type="submit" value="Register" onclick="formRegisterSubmit()" />
+                <input style="margin:20px -20px;text-align:right;" class="btn btn-primary pull-right" type="submit" value="Register" onclick="formRegisterSubmit()" />
                 <div id="registerSubmitValidate" style="margin:25px;" class="validation"></div>
             </div>
         </div>
@@ -125,6 +125,5 @@
             <li id="numbers" class="help_element_invalid">number</li>
         </ul>
     </div>
-  
 </body>
 </html>

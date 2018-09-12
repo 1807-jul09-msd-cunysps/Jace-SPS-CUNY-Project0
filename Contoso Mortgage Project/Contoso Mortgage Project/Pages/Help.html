@@ -9,7 +9,7 @@
 
 
 </head>
-<body>
+<body onload="checkSession('home')">
     <nav>
         <a href="Home.html" class="nav_logo">Contoso Mortgage</a>
         <a href="SignIn.html" class="nav_ele">Sign In</a>
@@ -25,9 +25,22 @@
                 <button class="btn btn-primary col-md-2" onclick="getKBArticles()">Search</button>
             </div>
             <div class="row">
-                <div id="kbResultsTaget"></div>
+                <div id="kbResultsTaget" style="text-align:center;" class="col-md-12"></div>
             </div>
         </div>
     </div>
+
+
+    <footer class="col-md-12 mb-4 container">
+        <div class="row" style="text-align:center;">
+            <div class="col-md-3"></div>
+            <div class="col-md-1"> Privacy</div>
+            <div class="col-md-1">Security</div>
+            <div class="col-md-1">About Us</div>
+            <div class="col-md-1">Contact Us</div>
+            <div class="col-md-2">Terms & Agreements</div>
+            <div class="col-md-3"></div>
+        </div>
+    </footer>
 </body>
 </html>

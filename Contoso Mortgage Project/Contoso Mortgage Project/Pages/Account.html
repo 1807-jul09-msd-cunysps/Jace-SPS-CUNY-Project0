@@ -102,7 +102,7 @@
 
     <div id="issueShadow" class="shadow no_display" onclick="showIssue(false)"></div>
 
-    <form onsubmit="return false;" action="" id="issuePanel" class="no_display">
+    <form onsubmit="return false;" action="" id="issuePanel" class="no_display" style="padding-bottom:15px;box-shadow:none;">
         <div class="flex-row mortgage_name mortgage_panel_ele">
             <label class="col-md-11" style="padding-right: 0px;" id="issueTitle"></label>
             <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showIssue(false)" />
@@ -112,9 +112,9 @@
             <div id="issueSubject" class="col-md-4">Mortgage Number:</div>
             <label class="col-md-8" style="padding:0px;" id="issueMortgageNumber"></label>
         </div>
-        <div class="row account_row">
+        <div class="row account_row" style="height: auto;padding-bottom: 15px;">
             <div id="issueSubject" class="col-md-4">Subject:</div>
-            <select id="issueSubjectTarget" class="form-control col-md-8">
+            <select id="issueSubjectTarget" class="form-control col-md-8" style="padding-bottom:15px;">
                 <option value="Billing" selected>Billing</option>
                 <option value="Flooding">Flooding</option>
                 <option value="WaterWay">Water Way</option>
@@ -123,17 +123,16 @@
             </select>
 
         </div>
-        <div class="row account_row" style="height: auto;">
+        <div class="row account_row" style="height: auto;padding-bottom: 15px;">
             <div id="issueDescription" class="col-md-4">Description:</div>
             <textarea id="issueDescriptionTarget" class="form-control col-md-8" rows="6"></textarea>
         </div>
         <div class="flex-row-reverse btn_row">
             <button id="back" class="btn col-md-3" onclick="showIssue('back')">Back</button>
             <button class="btn col-md-3" onclick="issueSubmit()">Submit Case</button>
-            <div class="btn col-md-3"></div>
-            <div id="paymentFeedback" class="btn col-md-3">
-                <img id="paymentSuccess" src="../Pics/success.png" alt="success" class="no_display" />
-                <img id="paymentLoading" src="../Pics/loading.gif" alt="loading" class="no_display" />
+            <div id="paymentFeedback" class="btn col-md-1">
+                <img id="issueLoading" src="../Pics/loading.gif" alt="loading" style="height:40px;width:40px;margin-left:0px;" class="no_display" />
+                <img id="issueSuccess" src="../Pics/success.png" alt="success" class="no_display" />
             </div>
         </div>
     </form>

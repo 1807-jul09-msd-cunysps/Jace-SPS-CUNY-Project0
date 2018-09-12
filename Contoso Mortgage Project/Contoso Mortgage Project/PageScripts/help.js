@@ -1,4 +1,15 @@
 ﻿function getKBArticles() {
+    let container = document.getElementById("kbResultsTaget");
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    let loadingImg = document.createElement("img");
+    loadingImg.src = "../Pics/loading.gif";
+    loadingImg.alt = "loaing";
+    loadingImg.classList.add("kb_loading");
+    container.appendChild(loadingImg);
+
     let search = document.getElementById("searchInput").value;
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
@@ -6,11 +17,14 @@
             let kbList;
             if (this.responseText === "No Record Found.") {
                 kbList === this.responseText;
+
+                let noRecords = document.createElement("h3");
+                noRecords.innerHTML = kbList;
+                container.appendChild(noRecords);
+                
+                container
             } else {
-                let container = document.getElementById("kbResultsTaget");
-                while (container.firstChild) {
-                    container.removeChild(container.firstChild);
-                }
+                container.removeChild(loadingImg);
                 kbList = JSON.parse(this.responseText);
                 for (var i = 0; i < kbList.length; i++) {
                     let element = document.createElement("DIV");

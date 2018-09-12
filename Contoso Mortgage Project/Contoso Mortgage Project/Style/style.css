@@ -176,6 +176,9 @@ footer {
     height: auto;
     padding-bottom: 15px;
 }
+.kb_loading{
+    margin:auto;
+}
 
 .mortgage_account {
     cursor: pointer;

@@ -788,6 +788,8 @@ function formRegisterSubmit() {
     if (clearedValidation) {
         //Ajax call
         document.getElementById("registerSubmitValidate").innerHTML = "";
+        document.getElementById("registerLoading").classList.remove("no_display");
+        
         let registerObj = {};
         for (let i = 0; i < fields.length; i++) {
             registerObj[fields[i]] = signinFields[fields[i]];
@@ -798,6 +800,8 @@ function formRegisterSubmit() {
         xmlHttp.send(JSON.stringify(registerObj));
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                document.getElementById("registerLoading").classList.add("no_display");
+
                 formSignInSubmit("register");
             }
         };
@@ -937,14 +941,19 @@ function issueSubmit() {
         "Type": 273250000,
         "MortgageNumber": number
     };
+
+    document.getElementById("issueLoading").classList.remove("no_display");
+    
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/case", true);
     xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlHttp.send(JSON.stringify(issueObj));
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            document.getElementById("issueLoading").classList.remove("no_display");
             showIssue(false);
         } else if (xmlHttp.readyState === 4) {
+
             showIssue(false);
         }
     };
