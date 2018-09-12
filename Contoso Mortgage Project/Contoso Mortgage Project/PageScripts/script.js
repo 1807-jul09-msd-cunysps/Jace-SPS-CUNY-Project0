@@ -936,14 +936,16 @@ function issueSubmit() {
         "HighReason": highReason,
         "Type": 273250000,
         "MortgageNumber": number
-    }
+    };
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/case", true);
     xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlHttp.send(JSON.stringify(issueObj));
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            //window.location.reload(true);
+            showIssue(false);
+        } else if (xmlHttp.readyState === 4) {
+            showIssue(false);
         }
     };
 }

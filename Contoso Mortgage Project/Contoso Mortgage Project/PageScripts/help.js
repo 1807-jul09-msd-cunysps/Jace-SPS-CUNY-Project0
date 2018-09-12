@@ -1,37 +1,4 @@
-﻿
-function handleResponse(status, response) {
-    debugger;
-    alert(response);
-}
-
-function searchAPI(search_terms)
-///passes a search string, returns all knowledge-base articles formatted as html
-{
-    var result_articles = "failed";
-
-    var req = new XMLHttpRequest();
-    req.open("POST", "http://team3webapi.azurewebsites.net/api/knowledge");
-    req.setRequestHeader("Content-Type", "application/xml;charset=UTF-8");
-    // req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    req.send("mortgage");
-    req.onreadystatechange = function () {
-        //  alert(this.readyState);
-        // alert(this.readyState);
-
-        if (req.readyState == 4) {
-            alert(this.statusText);
-            result_articles = this.response;
-            result_articles = result_articles.substring(1, result_articles.length - 1);
-        }
-        return result_articles;
-    };
-    //req.close();
-
-    //POST: http://team3webapi.azurewebsites.net/api/knowledge (return all publish articles by rating)
-}
-
-
-function getKBArticles() {
+﻿function getKBArticles() {
     let search = document.getElementById("searchInput").value;
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
@@ -70,7 +37,7 @@ function getKBArticles() {
                     let row2 = document.createElement("div");
                     row2.classList.add("row");
                     row2.classList.add("account_row");
-                    row2.classList.add("");
+                    row2.classList.add("kb_content");
 
                     let contentValue = document.createElement("div");
                     contentValue.classList.add("col-md-4");

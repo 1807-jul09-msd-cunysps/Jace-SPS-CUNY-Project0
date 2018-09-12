@@ -23,15 +23,16 @@ var formFields = {
     Option: true
 };
 //variables to store returned ContactGUID and Mortgage Account Number
-var contactID, mortgageResult, applyPage, files = [], files64 = [], filesUploaded = 0;
+var contactID, mortgageResult, applyPage, files = [], files64 = [], filesUploaded = 0, state;
 
 
 
 function applyCheckSession() {
     let value = applyGetSession("user");
     if (value !== false) {
+        let userObj = JSON.parse(value);
         applyPage = "mortgage";
-        contactID = value.id;
+        contactID = userObj["GUID"];
     } else {
         applyPage = "apply";
     }
@@ -58,6 +59,7 @@ function applyGetSession(cName) {
 function applyPageHandler() {
     if (applyPage !== "apply") {
         document.getElementById("formMortgage").classList.remove("hiddenForm");
+        document.getElementById("formMortgage").classList.remove("no_display");
         document.getElementById("formContact").classList.add("fadeOutNext");
 
         document.getElementById("sign_in").classList.add("no_display");
@@ -133,16 +135,20 @@ function validate(element) {
 function validateChars(element) {
     let results;
     let text = "";
-    if (validateCharsCheck(element) && !validateSymbolsCheck(element)) {
-        text = "";
-        element.classList.remove("is-invalid");
-        results = element.value;
+    if (element.disabled === true) {
+        result = "N/A";
     } else {
-        element.classList.add("is-invalid");
-        text = (element.value.length !== 0) ?
-            "Numeric values and symbols are not allowed in this field." :
-            "This field is required.";
-        results = false;
+        if (validateCharsCheck(element) && !validateSymbolsCheck(element)) {
+            text = "";
+            element.classList.remove("is-invalid");
+            results = element.value;
+        } else {
+            element.classList.add("is-invalid");
+            text = (element.value.length !== 0) ?
+                "Numeric values and symbols are not allowed in this field." :
+                "This field is required.";
+            results = false;
+        }
     }
     document.getElementById(element.id + "Validate").innerHTML = text;
     formFields[element.id] = results;
@@ -239,6 +245,7 @@ function formContactSubmit() {
         };
 
         document.getElementById("formMortgage").classList.remove("hiddenForm");
+        document.getElementById("formMortgage").classList.remove("no_display");
         document.getElementById("formContact").classList.add("fadeOutNext");
 
     } else {
@@ -295,6 +302,8 @@ function formMortgageSubmit() {
                     mortgageObj[fields[i]] = formFields[fields[i]];
             }
         }
+        document.getElementById("loading").classList.remove("no_display");
+        document.querySelector("#Submit").disabled = true;
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/mortgage", true);
         xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -337,6 +346,8 @@ function uploadFiles(fileObj) {
 function checkUploadComplete() {
     filesUploaded += 1;
     if (filesUploaded >= files.length) {
+        document.querySelector("#Submit").disabled = false;
+        document.getElementById("loading").classList.add("no_display");
         window.location.replace("/Pages/Account.html");
     }
 }
@@ -377,6 +388,13 @@ function removeFile(file) {
     }
     let element = document.getElementById(file);
     document.getElementById("files").removeChild(element);
+}
+
+function checkCanada() {
+    let element = document.getElementById("Country");
+    let result = (element.value === "Canada") ? true : false;
+    document.getElementById("State").disabled = result;
+    document.getElementById("State").value = "N/A";
 }
 
 //function addBase64(file) {

@@ -133,7 +133,7 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label>Country:</label>
-                <select id="Country" class="form-control">
+                <select id="Country" class="form-control" onchange="checkCanada()">
                     <option value="US" selected>United States</option>
                     <option value="Canada">Canada</option>
                 </select>
@@ -154,7 +154,7 @@
         </div>
     </form>
 
-    <form id="formMortgage" style="z-index:2;" class="hiddenForm form_apply" onsubmit="return false;" action="">
+    <form id="formMortgage" style="z-index:2;" class="hiddenForm no_display form_apply" onsubmit="return false;" action="">
         <h2>Loan Details</h2>
         <div class="form-row">
             <div class="col-md-6">
@@ -180,7 +180,8 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-6">
+            <div class="col-md-12 upload_label">
+                <label style="font-size:20px;font-weight:bold">Identity Documents</label><br/>
                 <label class="btn">
                     Upload File(s) <input id="fileUplaod" type="file" accept="" onchange="handleFileInput(this)" multiple hidden>
                     <label id="files"></label>
@@ -189,11 +190,11 @@
             </div>
         </div>
         <div class="form-row">
-            <input style="margin:20px;text-align:right;" class="btn btn-primary pull-right" type="submit" value="Next" onclick="formMortgageSubmit()" />
-            <div id="SubmitValidate" style="margin:25px;" class="validation"></div>
+            <input id="Submit" style="margin:20px;text-align:right;" class="btn btn-primary pull-right" type="submit" value="Next" onclick="formMortgageSubmit()" />
+            <img id="loading" src="../Pics/loading.gif" alt="loading" style="height:40px;width:40px;margin-top:20px;" class="no_display"/>
+            <div id="SubmitValidate" style="margin:25px;" class="col-md-2 validation"></div>
         </div>
     </form>
-
     <div></div>
     <footer></footer>
 </body>

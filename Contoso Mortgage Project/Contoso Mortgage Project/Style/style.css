@@ -59,6 +59,11 @@ body {
     color: #ffffff;
 }
 
+div.kb_content > div.col-md-4 
+{
+    width: 90% !important;
+}
+
 #error 
 {
     position: fixed;
@@ -166,6 +171,12 @@ footer {
     background-color: #ffffff;
     padding: 0px;
 }
+
+.kb_content{
+    height: auto;
+    padding-bottom: 15px;
+}
+
 .mortgage_account {
     cursor: pointer;
     background-color: #484848;
@@ -383,6 +394,13 @@ nav_account_label{
     height: 400px;
     display: block;
 }
+
+.upload_label {
+    margin-top: 15px;
+    height: 100px;
+    border: solid 1px #dadada;
+}
+
 .validation{
     color: red;
 }
