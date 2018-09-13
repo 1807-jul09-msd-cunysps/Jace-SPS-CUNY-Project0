@@ -59,9 +59,8 @@
             <div id="balanceTarget" class="col-md-8">N/A</div>
         </div>
         <div class="flex-row-reverse btn_row">
-            <button 
-                class="btn col-md-3" 
-                onclick="showIssue(true, document.getElementById('mortgageName').innerHTML, document.getElementById('accountNumberTarget').innerHTML)">
+            <button class="btn col-md-3"
+                    onclick="showIssue(true, document.getElementById('mortgageName').innerHTML, document.getElementById('accountNumberTarget').innerHTML)">
                 Report An Issue
             </button>
         </div>
@@ -107,14 +106,14 @@
             <label class="col-md-11" style="padding-right: 0px;" id="issueTitle"></label>
             <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showIssue(false)" />
         </div>
-        
+
         <div class="row account_row">
             <div id="issueSubject" class="col-md-4">Mortgage Number:</div>
             <label class="col-md-8" style="padding:0px;" id="issueMortgageNumber"></label>
         </div>
-        <div class="row account_row" style="height: auto;padding-bottom: 15px;">
+        <div class="row account_row" style="height:auto;padding-bottom: 15px;">
             <div id="issueSubject" class="col-md-4">Subject:</div>
-            <select id="issueSubjectTarget" class="form-control col-md-8" style="padding-bottom:15px;">
+            <select id="issueSubjectTarget" class="form-control col-md-8">
                 <option value="Billing" selected>Billing</option>
                 <option value="Flooding">Flooding</option>
                 <option value="WaterWay">Water Way</option>
@@ -133,6 +132,7 @@
             <div id="paymentFeedback" class="btn col-md-1">
                 <img id="issueLoading" src="../Pics/loading.gif" alt="loading" style="height:40px;width:40px;margin-left:0px;" class="no_display" />
                 <img id="issueSuccess" src="../Pics/success.png" alt="success" class="no_display" />
+                <div id="issueValidate" style="margin:25px;" class="col-md-2 validation"></div>
             </div>
         </div>
     </form>
@@ -159,6 +159,68 @@
             <div id="caseStatusCodeTarget" class="col-md-8">N/A</div>
         </div>
     </div>
+
+    <div id="editShadow" class="shadow no_display" onclick="showEditPanel(false)"></div>
+
+    <form onsubmit="return false;" action="" id="editPanel" class="no_display" style="padding-bottom:15px;box-shadow:none;">
+        <div class="flex-row mortgage_name mortgage_panel_ele">
+            <label class="col-md-11" style="padding-right: 0px;" id="editProfileName"></label>
+            <img src="../Pics/xicon.png" style="height:auto;width:20px;cursor:pointer;" onclick="showEditPanel(false)" />
+        </div>
+
+        <div class="row account_row" style="padding-bottom:15px;height:auto;">
+            <label class="col-md-4">Email:*</label>
+            <input id="Email" class="form-control col-md-4" type="text" onblur="validate(this)" />
+            <div id="EmailValidate" class="validation col-md-4"></div>
+        </div>
+
+        <div class="row account_row" style="padding-bottom:15px;height:auto;">
+            <label class="col-md-4">Mobile Phone:*</label>
+            <input id="MobilePhone" class="form-control col-md-4" type="text" onblur="validatePhone(this)" />
+            <div id="MobilePhoneValidate" class="validation col-md-4"></div>
+        </div>
+
+
+        <div class="row account_row" style="padding-bottom:15px;height:auto;">
+            <label class="col-md-4">Business Phone:*</label>
+            <input id="BusinessPhone" class="form-control col-md-4" type="text" onblur="validatePhone(this)" />
+            <div id="BusinessPhoneValidate" class="validation col-md-4"></div>
+        </div>
+
+        <div class="row account_row">
+            <div id="editAddressLine1" class="col-md-3">Address Line 1:</div>
+            <label class="col-md-3" style="padding:0px;" id="editAddressLine1Label"></label>
+       
+            <div id="editAddressLine2" class="col-md-3">Address Line 1:</div>
+            <label class="col-md-3" style="padding:0px;" id="editAddressLine2Label"></label>
+        </div>
+
+        <div class="row account_row">
+            <div id="editCity" class="col-md-3">City:</div>
+            <label class="col-md-3" style="padding:0px;" id="editCityLabel"></label>
+
+            <div id="editState" class="col-md-3">State:</div>
+            <label class="col-md-3" style="padding:0px;" id="editStateLabel"></label>
+        </div>
+
+        <div class="row account_row">
+            <div id="editCountry" class="col-md-3">Country:</div>
+            <label class="col-md-3" style="padding:0px;" id="editCountryLabel"></label>
+
+            <div id="editZipCode" class="col-md-3">Postal Code:</div>
+            <label class="col-md-3" style="padding:0px;" id="editZipCodeLabel"></label>
+        </div>
+
+        <div class="flex-row-reverse btn_row">
+            <button class="btn col-md-3" onclick="showEditPanel(false)">Back</button>
+            <button id="editSave" class="btn col-md-3" onclick="editSubmit()">Save</button>
+            <div id="editFeedback" class="btn col-md-1">
+                <img id="editLoading" src="../Pics/loading.gif" alt="loading" style="height:40px;width:40px;margin-left:0px;" class="no_display" />
+                <img id="editSuccess" src="../Pics/success.png" alt="success" class="no_display" />
+            </div>
+        </div>
+
+    </form>
 
     <footer class="col-md-12 mb-4 container">
         <div class="row" style="text-align:center;">

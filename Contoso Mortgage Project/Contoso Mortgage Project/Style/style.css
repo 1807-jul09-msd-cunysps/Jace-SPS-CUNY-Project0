@@ -64,6 +64,19 @@ div.kb_content > div.col-md-4
     width: 90% !important;
 }
 
+#editPanel {
+    position: fixed;
+    z-index: 997;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: auto;
+    min-height: 70%;
+    margin: 5% 25%;
+    background-color: #ffffff;
+    padding: 0px;
+}
+
 #error 
 {
     position: fixed;

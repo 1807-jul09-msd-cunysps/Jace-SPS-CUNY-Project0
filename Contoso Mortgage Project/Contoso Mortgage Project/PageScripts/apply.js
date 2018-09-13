@@ -225,30 +225,32 @@ function formContactSubmit() {
     }
     if (clearedValidation) {
         //Ajax call
-        document.getElementById("SubmitValidate").innerHTML = "";
+        document.getElementById("contactSubmitValidate").innerHTML = "";
         let contactObj = {};
         for (let i = 0; i < fields.length; i++) {
             contactObj[fields[i]] = formFields[fields[i]];
         }
         contactObj["State"] = (contactObj["Country"] === "Canada") ? "" : contactObj["State"];
 
+        document.getElementById("contactLoading").classList.remove("no_display");
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/user", true);
+        xmlHttp.open("POST", "https://team3webapi.azurewebsites.net/api/user", true);
         xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlHttp.send(JSON.stringify(contactObj));
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 contactID = this.response;
                 contactID = contactID.substring(1, contactID.length - 1);
+
                 document.getElementById("formMortgage").classList.remove("hiddenForm");
+                document.getElementById("formMortgage").classList.remove("no_display");
                 document.getElementById("formContact").classList.add("fadeOutNext");
+                document.getElementById("contactLoading").classList.add("no_display");
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status >= 400) {
+                document.getElementById("contactSubmitValidate").innerHTML = "An Error has occured while executing request.";
+                document.getElementById("contactLoading").classList.add("no_display");
             }
         };
-
-        document.getElementById("formMortgage").classList.remove("hiddenForm");
-        document.getElementById("formMortgage").classList.remove("no_display");
-        document.getElementById("formContact").classList.add("fadeOutNext");
-
     } else {
         document.getElementById("SubmitValidate").innerHTML = "There are errors on the form.";
     }
@@ -288,7 +290,7 @@ function formMortgageSubmit() {
     }
     if (clearedValidation) {
         //Ajax call
-        document.getElementById("SubmitValidate").innerHTML = "";
+        document.getElementById("mortgageSubmitValidate").innerHTML = "";
         let mortgageObj = { ContactID: contactID };
         //let mortgageObj = { ContactID: "ddb4b385-3fb1-e811-a96b-000d3a1ca939" };
         for (let i = 0; i < fields.length; i++) {
@@ -303,10 +305,11 @@ function formMortgageSubmit() {
                     mortgageObj[fields[i]] = formFields[fields[i]];
             }
         }
-        document.getElementById("loading").classList.remove("no_display");
+
+        document.getElementById("mortgageloading").classList.remove("no_display");
         document.querySelector("#Submit").disabled = true;
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/mortgage", true);
+        xmlHttp.open("POST", "https://team3webapi.azurewebsites.net/api/mortgage", true);
         xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlHttp.send(JSON.stringify(mortgageObj));
         xmlHttp.onreadystatechange = function () {
@@ -325,7 +328,10 @@ function formMortgageSubmit() {
                 if (files.length === 0) {
                     window.location.replace("/Pages/Account.html");
                 }
-                
+                document.getElementById("mortgageloading").classList.add("no_display");
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status >= 400) {
+                document.getElementById("mortgageSubmitValidate").innerHTML = "An Error has occured while executing request.";
+                document.getElementById("mortgageloading").classList.add("no_display");
             }
         };
     } else {
@@ -335,12 +341,15 @@ function formMortgageSubmit() {
 
 function uploadFiles(fileObj) {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/note", true);
+    xmlHttp.open("POST", "https://team3webapi.azurewebsites.net/api/note", true);
     xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlHttp.send(JSON.stringify(fileObj));
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
             checkUploadComplete();
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status >= 400) {
+            document.getElementById("mortgageSubmitValidate").innerHTML = "An Error has occured while executing request.";
+            document.getElementById("mortgageloading").classList.add("no_display");
         }
     };
 }
@@ -348,7 +357,8 @@ function checkUploadComplete() {
     filesUploaded += 1;
     if (filesUploaded >= files.length) {
         document.querySelector("#Submit").disabled = false;
-        document.getElementById("loading").classList.add("no_display");
+        document.getElementById("mortgageSubmitValidate").innerHTML = "";
+        document.getElementById("mortgageloading").classList.add("no_display");
         window.location.replace("/Pages/Account.html");
     }
 }

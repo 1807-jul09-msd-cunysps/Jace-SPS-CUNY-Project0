@@ -4,7 +4,7 @@
 
 //OnLoad Variables
 //variables to store returned ContactGUID and Mortgage Account Number
-var contactID, userName, contactObj, mortgageList,  paymentList, accountPage;
+var contactID, userName, contactObj, mortgageList, paymentList = [], accountPage, editFormFields = {};
 
 //Global Variables/ Objects
 var signinFields = {
@@ -21,6 +21,146 @@ var passwordValidation = {
     numbers: false
 };
 
+//Validation====================================================
+function validatePasswordLength(string) {
+    return (string.length >= 8) ? true : false;
+}
+
+function validatePasswordChars(element) {
+    var val = /[a-zA-Z\s]/;
+    let results = val.test(element.value) ? true : false;
+    return results;
+}
+
+//Validate All Charcters
+function validateCharsCheck(element) {
+    var val = /^[a-zA-Z\s]+$/;
+    let results = val.test(element.value) ? true : false;
+    return results;
+}
+
+//Validate Symbols
+function validateSymbolsCheck(element) {
+    const val = /[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?\(\)_]/;
+    let results = val.test(element.value) ? true : false;
+    return results;
+}
+//Validate Numbers
+function validateNumbersCheck(element) {
+    const val = /^\d*$/;
+    let results = val.test(element.value) ? true : false;
+    return results;
+}
+
+function validateContainsNumber(element) {
+    const val = /\d/;
+    let results = val.test(element.value) ? true : false;
+    return results;
+}
+//Validate SSN format xxx-xx-xxxx | xxxxxxxxx
+function validateSSNCheck(element) {
+    const val = /^(?:\d{3}-\d{2}-\d{4}|\d{9})$/;
+    let results = val.test(element.value) ? true : false;
+    return results;
+}
+//Validate Phone Number (xxx) xxx-xxxx | xxx-xxx-xxxx | xxxxxxxxxx
+function validatePhoneCheck(element) {
+    const val = /^(?:\(\d{3}\)\d{3}-\d{4}|\d{3}-\d{3}-\d{4}|\d{10})$/;
+    let results = val.test(element.value) ? true : false;
+    return results;
+}
+//Validate Any input
+function validate(element) {
+    let text = "";
+    if (element.value.length === 0) {
+        element.classList.add("is-invalid");
+        text = "This field is required.";
+        editFormFields[element.id] = false;
+    } else {
+        element.classList.remove("is-invalid");
+        editFormFields[element.id] = element.value;
+    }
+    document.getElementById(element.id + "Validate").innerHTML = text;
+}
+//Validate Alphanumeric Characters 
+function validateChars(element) {
+    let results;
+    let text = "";
+    if (element.disabled === true) {
+        result = "N/A";
+    } else {
+        if (validateCharsCheck(element) && !validateSymbolsCheck(element)) {
+            text = "";
+            element.classList.remove("is-invalid");
+            results = element.value;
+        } else {
+            element.classList.add("is-invalid");
+            text = (element.value.length !== 0) ?
+                "Numeric values and symbols are not allowed in this field." :
+                "This field is required.";
+            results = false;
+        }
+    }
+    document.getElementById(element.id + "Validate").innerHTML = text;
+    editFormFields[element.id] = results;
+}
+//Validate Numeric Characters
+function validateNumbers(element) {
+    let results;
+    let text = "";
+    if ((validateNumbersCheck(element) && !validateSymbolsCheck(element)) && element.value.length !== 0) {
+        text = "";
+        element.classList.remove("is-invalid");
+        results = element.value;
+    } else {
+        element.classList.add("is-invalid");
+        text = (element.value.length !== 0) ?
+            "Only numeric values are allowed in this field." :
+            "This field is required.";
+        results = false;
+    }
+    document.getElementById(element.id + "Validate").innerHTML = text;
+    editeditFormFields[element.id] = results;
+}
+//Validate SSN Format and Numeric Characters
+function validateSSN(element) {
+    let results;
+    let text = "";
+    if (validateSSNCheck(element) && !validateCharsCheck(element)) {
+        text = "";
+        element.classList.remove("is-invalid");
+        results = element.value;
+    } else {
+        element.classList.add("is-invalid");
+        text = (element.value.length !== 0) ?
+            "Please input your 9 digit, '-' are optional." :
+            "This field is required.";
+        results = false;
+    }
+    document.getElementById(element.id + "Validate").innerHTML = text;
+    editFormFields[element.id] = results;
+}
+//Validate Phone Number format and Numeric Characters
+function validatePhone(element) {
+    var results;
+    let text = "";
+    if (validatePhoneCheck(element) && !validateCharsCheck(element)) {
+        text = "";
+        element.classList.remove("is-invalid");
+        results = element.value;
+    } else {
+        element.classList.add("is-invalid");
+        text = (element.value.length !== 0) ?
+            "Please input your phone number digit '()' and '-' are optional." :
+            "This field is required.";
+        results = false;
+    }
+    document.getElementById(element.id + "Validate").innerHTML = text;
+    editFormFields[element.id] = results;
+}
+//Validation====================================================
+
+
 //Page Load Functions======================================================================================
 
 //on Page load call checkSessionLoad()
@@ -32,12 +172,14 @@ function loadContactObj() {
         if (this.readyState === 4 && this.status === 200) {
             contactObj = JSON.parse(this.responseText);
             loadMortgages();
-        } else {
-            contactObj = false;
-            //loadAccountInfo();
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status >= 400) {
+            document.getElementById("signInSubmitValidate").innerHTML = "An Error has occured while executing request.";
+            document.getElementById("signInLoading").classList.add("no_display");
+            document.getElementById("registerSubmitValidate").innerHTML = "An Error has occured while executing request.";
+            document.getElementById("registerLoading").classList.add("no_display");
         }
     };
-    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/user/" + contactID, true);
+    xmlHttp.open("GET", "https://team3webapi.azurewebsites.net/api/user/" + contactID, true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.send();
 }
@@ -46,27 +188,107 @@ function loadMortgages() {
     xmlHttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             mortgageList = JSON.parse(this.responseText);
-            loadPayments();
-        } else {
-            mortgageList = false;
+            setSession();
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status >= 400) {
+            mortgageList = [];
         }
     };
-    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/mortgage/" + contactID, true);
+    xmlHttp.open("GET", "https://team3webapi.azurewebsites.net/api/mortgage/" + contactID, true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.send();
 }
 
-function loadPayments() {
+function loadPayments(container) {
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             paymentList = JSON.parse(this.responseText);
-            setSession();
+
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+
+            if (paymentList.length === 0) {
+                let noRecords = document.createElement("h3");
+
+                noRecords.innerHTML = "No Reports to show";
+                container.appendChild(noRecords);
+            }
+            for (let i = 0; i < paymentList.length; i++) {
+                let element = document.createElement("DIV");
+                element.classList.add("payment_account");
+                element.classList.add("col-md-10");
+                element.classList.add("mb-4");
+
+                let name = "";
+                for (var j = 0; j < mortgageList.length; j++) {
+                    if (paymentList[i].revfinal_mortgagenumber.Value === mortgageList[j].revfinal_mortgagenumber) {
+                        name = mortgageList[j].revfinal_name;
+                    }
+                }
+
+                let nameLabel = document.createElement("h3");
+                nameLabel.innerHTML = name;
+                nameLabel.classList.add("mortgage_name");
+                let status;
+                switch (paymentList[i].revfinal_paymentstatus.Value) {
+                    case 273250001:
+                        status = "Paid";
+                        break;
+                    default:
+                        status = "Awating Payment"
+                }
+
+                let statusLabel = document.createElement("label");
+                statusLabel.innerHTML = "Status: " + status;
+                statusLabel.classList.add("col-md-4");
+                statusLabel.classList.add("mb-4");
+                statusLabel.classList.add("payment_ele");
+
+                const numberWithCommas = (x) => {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                };
+                let balance = numberWithCommas(paymentList[i].revfinal_payment.Value);
+                let totalAmount = "Balance: " + balance;
+
+                let amount = document.createElement("label");
+                amount.innerHTML = totalAmount;
+                amount.classList.add("col-md-4");
+                amount.classList.add("mb-4");
+                amount.classList.add("payment_ele");
+
+                let duedate = paymentList[i].revfinal_duedate;
+                let month = duedate.substring(5, 7);
+                let day = duedate.substring(8, 10);
+                duedate = day + "/" + month;
+
+                let duedateLabel = document.createElement("label");
+                duedateLabel.innerHTML = "Due Date: " + duedate;
+                duedateLabel.classList.add("col-md-4");
+                duedateLabel.classList.add("mb-4");
+                duedateLabel.classList.add("payment_ele");
+
+
+                element.appendChild(nameLabel);
+                element.appendChild(statusLabel);
+                element.appendChild(amount);
+                element.appendChild(duedateLabel);
+
+                //let list = [];
+                //for (var i = 0; i < paymentList.length; i++) {
+                //    if (paymentList[i].revfinal_mortgagerequestid === mortgageList[i].revfinal_mortgagenumber) {
+                //        list.push(paymentList[i]);
+                //    }
+                //}
+                element.onclick = showPayment.bind(this, name, status, balance, duedate, i);
+                container.appendChild(element);
+
+            }
         } else {
             paymentList = false;
         }
     };
-    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/payment/" + contactID, true);
+    xmlHttp.open("GET", "https://team3webapi.azurewebsites.net/api/payment/" + contactID, true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.send();
 }
@@ -289,16 +511,10 @@ function accountPageHandler() {
             edit.classList.add("profile_btn");
             edit.classList.add("col-md-3");
             edit.innerHTML = "Edit";
-
-            let save = document.createElement("button");
-            save.classList.add("btn");
-            save.classList.add("profile_btn");
-            save.classList.add("col-md-3");
-            save.innerHTML = "Save";
+            edit.onclick = showEditPanel.bind(this, true);
 
 
             row6.appendChild(edit);
-            row6.appendChild(save);
 
             element.appendChild(fullName);
             element.appendChild(row1);
@@ -311,82 +527,22 @@ function accountPageHandler() {
 
             container.appendChild(element);
         } else if (accountPage === "payment") {
-            for (let i = 0; i < paymentList.length; i++) {
-                let element = document.createElement("DIV");
-                element.classList.add("payment_account");
-                element.classList.add("col-md-10");
-                element.classList.add("mb-4");
 
-                let name = "";
-                for (var j = 0; j < mortgageList.length; j++) {
-                    if (paymentList[i].revfinal_mortgagenumber.Value === mortgageList[j].revfinal_mortgagenumber) {
-                        name = mortgageList[j].revfinal_name;
-                    }
-                }
+            let loadingImg = document.createElement("img");
+            loadingImg.id = "paymentLoading";
+            loadingImg.src = "../Pics/loading.gif";
+            loadingImg.alt = "loaing";
+            loadingImg.classList.add("loading");
+            container.appendChild(loadingImg);
 
-                let nameLabel = document.createElement("h3");
-                nameLabel.innerHTML = name;
-                nameLabel.classList.add("mortgage_name");
-                let status;
-                switch (paymentList[i].revfinal_paymentstatus.Value) {
-                    case 273250001:
-                        status = "Paid";
-                        break;
-                    default:
-                        status = "Awating Payment"
-                }
-
-                let statusLabel = document.createElement("label");
-                statusLabel.innerHTML = "Status: " +  status;
-                statusLabel.classList.add("col-md-4");
-                statusLabel.classList.add("mb-4");
-                statusLabel.classList.add("payment_ele");
-
-                const numberWithCommas = (x) => {
-                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                };
-                let balance = numberWithCommas(paymentList[i].revfinal_payment.Value);
-                let totalAmount = "Balance: " + balance;
-
-                let amount = document.createElement("label");
-                amount.innerHTML = totalAmount;
-                amount.classList.add("col-md-4");
-                amount.classList.add("mb-4");
-                amount.classList.add("payment_ele");
-
-                let duedate = paymentList[i].revfinal_duedate;
-                let month = duedate.substring(5, 7);
-                let day = duedate.substring(8, 10);
-                duedate = day + "/" + month;
-                
-                let duedateLabel = document.createElement("label");
-                duedateLabel.innerHTML = "Due Date: " + duedate;
-                duedateLabel.classList.add("col-md-4");
-                duedateLabel.classList.add("mb-4");
-                duedateLabel.classList.add("payment_ele");
-
-
-                element.appendChild(nameLabel);
-                element.appendChild(statusLabel);
-                element.appendChild(amount);
-                element.appendChild(duedateLabel);
-
-                //let list = [];
-                //for (var i = 0; i < paymentList.length; i++) {
-                //    if (paymentList[i].revfinal_mortgagerequestid === mortgageList[i].revfinal_mortgagenumber) {
-                //        list.push(paymentList[i]);
-                //    }
-                //}
-                element.onclick = showPayment.bind(this, name, status, balance, duedate, i);
-                container.appendChild(element);
-            }
+            loadPayments(container);
+            
         } else if (accountPage === "case") {
             let loadingImg = document.createElement("img");
             loadingImg.src = "../Pics/loading.gif";
             loadingImg.alt = "loaing";
             loadingImg.classList.add("loading");
             container.appendChild(loadingImg);
-
 
             let xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
@@ -396,6 +552,12 @@ function accountPageHandler() {
 
                     //container.id = "issueListContainer";
                     container.removeChild(loadingImg);
+                    if (caseList.length === 0) {
+                        let noRecords = document.createElement("h3");
+
+                        noRecords.innerHTML = "No Reports to show";
+                        container.appendChild(noRecords);
+                    }
                     for (var i = 0; i < caseList.length; i++) {
                         let element = document.createElement("DIV");
                         element.classList.add("mortgage_account");
@@ -456,11 +618,11 @@ function accountPageHandler() {
                         container.appendChild(element);
                     }
                     //document.getElementById("loadingPanel").classList.add("no_display");
-                } else if (this.readyState === 4 && this.status === 400) {
+                } else if (this.readyState === 4 && this.status >= 400) {
                     document.getElementById("error").innerHTML = "Case Request Failed.";
                 }
             };
-            xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/case/" + contactID, true);
+            xmlHttp.open("GET", "https://team3webapi.azurewebsites.net/api/case/" + contactID, true);
             xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlHttp.send();
         }
@@ -571,28 +733,31 @@ function selectformSignIn(value) {
 function formSignInSubmit(value) {
 
     let username, password;
-    if (value == "signin") {
-        username = document.getElementById("signInUserName").value,
-        password = document.getElementById("signInPassword").value
+    if (value === "signin") {
+        username = document.getElementById("signInUserName").value;
+        password = document.getElementById("signInPassword").value;
     } else {
-        username = document.getElementById("registerUserName").value,
-        password = document.getElementById("registerPassword").value
+        username = document.getElementById("registerUserName").value;
+        password = document.getElementById("registerPassword").value;
     }
     let signInObj = {
         UserName: username,
         Password: password
     };
+    document.getElementById("signInLoading").classList.remove("no_display");
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/checkuser", true);
+    xmlHttp.open("POST", "https://team3webapi.azurewebsites.net/api/checkuser", true);
     xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlHttp.send(JSON.stringify(signInObj));
     xmlHttp.onreadystatechange = function () {
+        
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
             contactID = this.responseText.substring(1, this.responseText.length - 1);
+            document.getElementById("signInLoading").classList.add("no_display");
             loadContactObj(signInObj.UserName);
-        } else if (xmlHttp.readyState === 4 && xmlHttp.status === 400) {
-            let result = JSON.parse(this.responseText);
-            document.getElementById("signInSubmitValidate").innerHTML = result["Message"];
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status >= 400) {
+            document.getElementById("signInSubmitValidate").innerHTML = "An Error has occured while executing request.";
+            document.getElementById("signInLoading").classList.add("no_display");
         }
     };
 }
@@ -647,7 +812,7 @@ function checkUserName(element) {
             }
             signinFields["UserName"] = reqResult;
             document.getElementById(element.id + "Validate").innerHTML = text;
-        } else if (this.readyState === 4 && this.status === 400) {
+        } else if (this.readyState === 4 && this.status >= 400) {
             let reqResult = JSON.parse(this.responseText)["Message"];
             //reqResult = reqResult.substring(1, reqResult.length - 1);
             let text = "";
@@ -660,7 +825,7 @@ function checkUserName(element) {
             document.getElementById(element.id + "Validate").innerHTML = text;
         }
     };
-    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/checkuser/" + userName, true);
+    xmlHttp.open("GET", "https://team3webapi.azurewebsites.net/api/checkuser/" + userName, true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.send();
 }
@@ -795,7 +960,7 @@ function formRegisterSubmit() {
             registerObj[fields[i]] = signinFields[fields[i]];
         }
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/userlogin", true);
+        xmlHttp.open("POST", "https://team3webapi.azurewebsites.net/api/userlogin", true);
         xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlHttp.send(JSON.stringify(registerObj));
         xmlHttp.onreadystatechange = function () {
@@ -803,6 +968,9 @@ function formRegisterSubmit() {
                 document.getElementById("registerLoading").classList.add("no_display");
 
                 formSignInSubmit("register");
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status >= 400) {
+                document.getElementById("registerSubmitValidate").innerHTML = "An Error has occured while executing request.";
+                document.getElementById("registerLoading").classList.add("no_display");
             }
         };
     } else {
@@ -871,11 +1039,11 @@ function paymentSubmit(i) {
             document.getElementById("paymentSuccess").classList.remove("no_display");
             loadPayments();
 
-        } else if (this.readyState === 4 && this.status === 400) {
+        } else if (this.readyState === 4 && this.status >= 400) {
             document.getElementById("error").innerHTML = "Payment Failed.";
         }
     };
-    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/pay/" + paymentList[i].id, true);
+    xmlHttp.open("GET", "https://team3webapi.azurewebsites.net/api/pay/" + paymentList[i].id, true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.send();
 }
@@ -945,16 +1113,105 @@ function issueSubmit() {
     document.getElementById("issueLoading").classList.remove("no_display");
     
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("POST", "http://team3webapi.azurewebsites.net/api/case", true);
+    xmlHttp.open("POST", "https://team3webapi.azurewebsites.net/api/case", true);
     xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlHttp.send(JSON.stringify(issueObj));
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            document.getElementById("issueLoading").classList.remove("no_display");
+            document.getElementById("issueLoading").classList.add("no_display");
             showIssue(false);
-        } else if (xmlHttp.readyState === 4) {
-
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status >= 400) {
+            document.getElementById("issueValidate").innerHTML = "An Error has occured while executing request.";
             showIssue(false);
         }
     };
+}
+
+function showEditPanel(value) {
+    if (value) {
+        document.querySelector("#editPanel").classList.remove("no_display");
+        document.querySelector("#editShadow").classList.remove("no_display");
+
+        document.querySelector("#editProfileName").innerHTML = contactObj.firstname + " " + contactObj.lastname;
+        document.querySelector("#Email").value = contactObj.emailaddress1;
+        document.querySelector("#MobilePhone").value = contactObj.mobilephone;
+        document.querySelector("#BusinessPhone").value = contactObj.telephone1;
+        document.querySelector("#editAddressLine1Label").innerHTML = contactObj.address1_line1;
+        document.querySelector("#editAddressLine2Label").innerHTML = contactObj.address1_line2;
+        document.querySelector("#editCityLabel").innerHTML = contactObj.address1_city;
+        document.querySelector("#editStateLabel").innerHTML = contactObj.address1_stateorprovince;
+        document.querySelector("#editCountryLabel").innerHTML = contactObj.address1_country;
+        document.querySelector("#editZipCodeLabel").innerHTML = contactObj.address1_postalcode;
+    } else {
+        document.querySelector("#MobilePhoneValidate").value = "";
+        document.querySelector("#BusinessPhoneValidate").value = "";
+        document.querySelector("#EmailValidate").value = "";
+
+
+        document.getElementById("editLoading").classList.add("no_display");
+        document.getElementById("editSuccess").classList.add("no_display");
+
+        document.querySelector("#editPanel").classList.add("no_display");
+        document.querySelector("#editShadow").classList.add("no_display");
+    }
+}
+
+
+function editSubmit() {
+    /*let fields = [
+        "FirstName", "LastName","State", "Country", "Email", "SSN"
+    ];*/
+    let fields = ["MobilePhone", "BusinessPhone", "Email"];
+    validateAllEditFields(fields);
+    let clearedValidation = true;
+    for (let i = 0; i < fields.length; i++) {
+        if (editFormFields[fields[i]] === false) {
+            clearedValidation = false;
+        }
+    }
+    if (clearedValidation) {
+        //Ajax call
+        document.getElementById("editSave").classList.remove("btn-danger");
+
+        contactObj.emailaddress1 = editFormFields["Email"];
+        contactObj.mobilephone = editFormFields["MobilePhone"];
+        contactObj.telephone1 = editFormFields["BusinessPhone"];
+
+        //for (let i = 0; i < fields.length; i++) {
+        //    contactObj[fields[i]] = editFormFields[fields[i]];
+        //}
+        editFormFields["ContactID"] = contactID;
+
+        setSession();
+        document.location.reload(true);
+        //document.getElementById("editLoading").classList.remove("no_display");
+
+        //var xmlHttp = new XMLHttpRequest();
+        //xmlHttp.open("POST", "https://team3webapi.azurewebsites.net/api/user", true);
+        //xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        //xmlHttp.send(JSON.stringify(editFormFields));
+        //xmlHttp.onreadystatechange = function () {
+        //    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        //        document.getElementById("editLoading").classList.add("no_display");
+        //        document.getElementById("editSuccess").classList.remove("no_display");
+
+        //        setSession();
+        //    } else if (xmlHttp.readyState === 4 && xmlHttp.status === 400) {
+        //        document.getElementById("editLoading").classList.add("no_display");
+        //    }
+        //};
+    } else {
+        document.getElementById("editSave").classList.add("btn-danger");
+    }
+}
+
+function validateAllEditFields(fields) {
+    for (var i = 0; i < fields.length; i++) {
+        let element = document.getElementById(fields[i]);
+        if (i >= 0 && i < 2) {
+            validatePhone(element);
+        }  else if (i === 2) {
+            validate(element);
+        }
+    }
 }

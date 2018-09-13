@@ -71,7 +71,7 @@
             document.getElementById("error").innerHTML = "Case Request Failed.";
         }
     };
-    xmlHttp.open("GET", "http://team3webapi.azurewebsites.net/api/knowledge/" + search, true);
+    xmlHttp.open("GET", "https://team3webapi.azurewebsites.net/api/knowledge/" + search, true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.send();
 }

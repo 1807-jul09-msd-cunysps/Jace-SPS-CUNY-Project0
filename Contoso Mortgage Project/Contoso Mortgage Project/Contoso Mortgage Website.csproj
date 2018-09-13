@@ -75,7 +75,6 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="PageScripts\account.js" />
     <Content Include="PageScripts\help.js" />
     <Content Include="PageScripts\jquery.js" />
     <Content Include="PageScripts\slideshow.js" />
@@ -116,6 +115,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Properties\PublishProfiles\ContosoMortgageWebsite - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ContosoMortgageWebsite - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
